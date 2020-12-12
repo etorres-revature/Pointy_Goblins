@@ -1,0 +1,37 @@
+{
+  "name": "str_aggregator",
+  "version": "1.0.0",
+  "description": "Short-term rental advertisement aggregator using: Node.js; Express.js; React.js; web-scrapers; and MongoDB.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etorres-revature/Pointy_Goblins.git"
+  },
+  "keywords": [
+    "MERN",
+    "full-stack",
+    "web-app",
+    "React.js",
+    "Node.js",
+    "Express.js",
+    "web-scrapers"
+  ],
+  "author": "Vincent 'Cenzo' Doria, Jr.; Shane 'GoodTime' Schilling; Abraham 'TechGuy' Spindel; and Eric D. 'Let's GEAUX!!' Torres",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/etorres-revature/Pointy_Goblins/issues"
+  },
+  "homepage": "https://github.com/etorres-revature/Pointy_Goblins#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.7",
+    "morgan": "^1.10.0"
+  }
+}
