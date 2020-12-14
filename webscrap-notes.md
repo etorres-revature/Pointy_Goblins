@@ -26,23 +26,48 @@ AIRBNB
  https://www.airbnb.com/s/austin/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&source=structured_search_input_header&search_type=search_query
 
 
-AUSTIN
-CONTAINER: `<div class="_8ssblpx">`
-
-TITLE: Class =  ._bzh5lkq
-
-DESCRIPTION: `<div class="_kqh46o" style="margin-top: 9px;">2 guests<span aria-hidden="true"> · </span>1 bedroom<span aria-hidden="true"> · </span>1 bed<span aria-hidden="true"> · </span>1 private bath</div>`
-
-PRICE : `<span class="_1p7iugi"><span class="_krjbj">Price:</span>$17</span>`
-
-LINK: `<a aria-label="Cheap private bedroom and private bathroom" data-check-info-section="true" href="/rooms/46768522?previous_page_section_name=1000&amp;federated_search_id=c56d5cf5-36ae-414a-a537-adcd91a5d128" rel="noopener noreferrer" target="listing_46768522" class="_gjfol0"></a>`
+## AUSTIN
 
 
-https://www.airbnb.com/rooms/46768522?source_impression_id=p3_1607914496_eQHY%2FLYGhGcRQURC&guests=1&adults=1
+**CONTAINER:**  `<div class="_8ssblpx">`
 
-<a aria-label="Cheap private bedroom and private bathroom" data-check-info-section="true" href="/rooms/46768522?previous_page_section_name=1000&amp;federated_search_id=ad7f593f-6925-4825-ba69-a61b75f96691" rel="noopener noreferrer" target="listing_46768522" class="_gjfol0"></a>
+**LOCATION:** `_1lbq8dg` 
+```
+const locationStr=$(html).find('._1lbq8dg').find('h1').text()
+const location=locationStr.split('Stays in ')
+``` 
 
 
-#ExploreLayoutController > div > div:nth-child(1) > div._8h8epe3 > div._twmmpk > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(1) > div > div > div > div > div._1048zci
+**TITLE:**  `._bzh5lkq`  |  
+```
+const title=$(element).find('._bzh5lkq').text()
+```
+**DESCRIPTION:** 
+```
+const description=$(element).find('._kqh46o').text()
+```
 
-document.querySelector("#ExploreLayoutController > div > div:nth-child(1) > div._8h8epe3 > div._twmmpk > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(1) > div > div > div > div > div._1048zci")
+`<div class="_kqh46o" style="margin-top: 9px;">2 guests<span aria-hidden="true"> · </span>1 bedroom<span aria-hidden="true"> · </span>1 bed<span aria-hidden="true"> · </span>1 private bath</div>`
+
+**PRICE:**
+
+```
+const priceStr=$(element).find('._1p7iugi').html() 
+const price=priceStr.split('</span>$')
+```
+
+`<span class="_1p7iugi"><span class="_krjbj">Price:</span>$17</span>`
+
+**LINK:** 
+```
+const link=$(element).find('._1048zci').find('a').attr('href')
+```
+
+`<a aria-label="Cheap private bedroom and private bathroom" data-check-info-section="true" href="/rooms/46768522?previous_page_section_name=1000&amp;federated_search_id=c56d5cf5-36ae-414a-a537-adcd91a5d128" rel="noopener noreferrer" target="listing_46768522" class="_gjfol0"></a>`
+
+**IMAGE:**
+ ```
+ const image=$(element).find('._1048zci').find('img').attr('src')
+```
+
+
