@@ -1,10 +1,14 @@
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import STRNavbar from "./components/layout/STRNavbar";
 
 function App() {
   return (
-    <div className="App">
-Hello World!!
-    </div>
+    <Router>
+      <STRNavbar />
+      <Container className="p-0" fluid={true}></Container>
+    </Router>
   );
 }
 
