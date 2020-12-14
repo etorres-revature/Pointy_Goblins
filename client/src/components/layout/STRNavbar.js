@@ -4,7 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 
 const MyNavBar = () => {
   return (
-    <Navbar className="border-bottom" bg="transparent" expand="md">
+    <Navbar className="border-bottom" bg="primary" variant="dark" expand="md">
       <Navbar.Brand>
         <strong>STR Aggregator</strong>
       </Navbar.Brand>

@@ -1,7 +1,36 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Container, Card, Form, Button } from "react-bootstrap";
 
 const Signup = () => {
-  return <div>This is the Signup Page</div>;
+  return (
+    <Container className="mt-4">
+      <div>
+        Returning users <Link to="/signin">CLICK HERE</Link> to access the Sign
+        In form.
+      </div>
+      <Card className="mt-3 p-3">
+        <div>New users may use this form to sign into their account:</div>
+        <Form className="mt-2">
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Card>
+    </Container>
+  );
 };
 
 export default Signup;
