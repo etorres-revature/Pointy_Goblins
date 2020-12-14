@@ -1,14 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import STRCarousel from "../components/carousel/STRCarousel";
 import STRCardList from "../components/card/STRCardList";
 
-const Landing = (props) => {
-  return (
-    <div>
-      <STRCarousel />
-      <STRCardList city={props.buttons} />
-    </div>
-  );
-};
+import austin from "../assets/img/austin.jpg";
+import denver from "../assets/img/denver.jpg";
+import houston from "../assets/img/houston.jpg";
+import boston from "../assets/img/boston.jpg";
+
+class Landing extends Component {
+  constructor() {
+    super();
+    this.state = {
+      buttons: [
+        { id: 0, img: austin, city: "AUSTIN" },
+        { id: 1, img: denver, city: "DENVER" },
+        { id: 2, img: houston, city: "HOUSTON" },
+        { id: 3, img: boston, city: "BOSTON" },
+      ],
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <STRCarousel />
+        <STRCardList cities={this.state.buttons} />
+      </div>
+    );
+  }
+}
 
 export default Landing;
