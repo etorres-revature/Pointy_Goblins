@@ -4,7 +4,7 @@ import "./Card.css";
 
 const STRCard = (props) => {
   return (
-    <Card border="primary" style={{ width: "18rem" }} className="mt-3 card">
+    <Card border="primary" style={{ width: "18rem" }} className="mt-3 cityCard">
       <Card.Body className="text-center">
         <Button variant="success">{props.city.city}</Button>
       </Card.Body>
