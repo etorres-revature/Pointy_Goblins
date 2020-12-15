@@ -18,7 +18,7 @@ return new Promise ((resolve,reject)=>{
 // function using axios to fetch the main url page for a the given city 
 async function getMainPage(url) {
   try {
-    const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch({headless: true});
     const [page] = await browser.pages();
     await page.setViewport({
       width: 1900,
@@ -64,44 +64,43 @@ function parseHTML (html) {
 
   $('.Hit').each((index,element)=>{
      const title = $(element).find('.HitInfo__headline').text()
-     const details = $(element).find('.HitInfo__details').text()
-    //  const link = $(element).find('a').html()
-    const image = $(element).find('.SimpleImageCarousel__image--cur').attr('style')
-     const price = $(element).find('.DualPrice__amount').html()
-    console.log('---------------------')
-    
-    console.log(title)
-    console.log(details)
-    console.log(price)
-    console.log(image)
+     const bedrooms =$(element).find('.Details__bedrooms').html()
+     const bathrooms=$(element).find('.Details__bathrooms').html()
+     const halfbath=$(element).find('.Details__halfbathrooms').html()
+     const sleeps=$(element).find('.Details__sleeps').html()
+    //  const description = $(element).find('.HitInfo__details').text()
+    const description = `${bedrooms} ${bathrooms} ${halfbath} ${sleeps}`
+    const link = $(element).find('.media-flex__content').attr('href')
+    const imageSrt = $(element).find('.SimpleImageCarousel__image--cur').attr('style')
+    let image = imageSrt.split('url("')
+    image = image[1].replace('");','')
+    const priceSrt = $(element).find('.DualPrice__amount').html()
+    const price = priceSrt.replace('$','')
+    const location = $(element).find('.GeoDistance__text').text()
 
+    // console.log('---------------------')
+    
+    // console.log(title)
+    // console.log(description)
+    // console.log(price)
+    // console.log(image)
+
+      dataObj = {
+    source: 'vrbo',
+    location: location,
+    title: title,
+    description: description,
+    // bedrooms: bedrooms,
+    // bath: bathrooms,
+    // halfbath: halfbath,
+    // sleeps: sleeps,
+    price: price,
+    link: `https://www.vrbo.com${link}`,
+    image: image, 
+  }
+  dataArray.push(dataObj)
    })
 
-
- 
-  // const locationStr=$(html).find('._1lbq8dg').find('h1').text()
-  // const location=locationStr.split('Stays in ')
-
-//   $('._8ssblpx').each((index,element)=>{ 
-//   const title=$(element).find('._bzh5lkq').text()
-//   const description=$(element).find('._kqh46o').text()
-//   const priceStr=$(element).find('._1p7iugi').html()
-//   const price=priceStr.split('</span>$')
-//   const link=$(element).find('._1048zci').find('a').attr('href')
-//   const image=$(element).find('._1048zci').find('img').attr('src')
-//   dataObj = {
-//     source: 'vrbo',
-//     location: '',
-//     title: '',
-//     description: '',
-//     price: price[1],
-//     link: ``,
-//     image: '', 
-//   }
-// dataArray.push(dataObj)
-
-//   })
- 
   return dataArray
 }
 
