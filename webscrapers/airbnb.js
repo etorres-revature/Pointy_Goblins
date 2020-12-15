@@ -41,6 +41,7 @@ console.log(error)
 
 // function parses the html from the axios call and parse it for the requied fields.It constructs a JSON object to be returned 
 function parseHTML (html) {
+ 
   const dataArray=[]
   const $ = cheerio.load(html)
   const locationStr=$(html).find('._1lbq8dg').find('h1').text()

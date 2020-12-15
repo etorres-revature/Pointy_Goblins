@@ -69,6 +69,12 @@ TITLE
 `<h2 class="HitInfo__headline hover-text" aria-hidden="true">Just across street!!--Kayak &amp; SUP ALL YEAR LONG. Swim, hike or river float</h2>`
 
 DESCRIPTION:
+
+Details__bedrooms 
+Details__bathrooms 
+Details__halfbathrooms 
+Details__sleeps 
+
 ```
 <div class="HitInfo__details">
 <div class="Details__propertyType Details__label" aria-hidden="true">house</div>
@@ -99,10 +105,10 @@ LOCATION: `GeoDistance__text`
 
 
 
-Details__bedrooms Details__label
-Details__bathrooms Details__label
-Details__halfbathrooms Details__label
-Details__sleeps Details__label
+Details__bedrooms 
+Details__bathrooms 
+Details__halfbathrooms 
+Details__sleeps 
 
 
 
