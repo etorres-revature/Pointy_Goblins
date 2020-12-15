@@ -14,6 +14,7 @@ const Signup = () => {
           New users may use this form to create their account:
         </Card.Header>
         <Card.Body>
+        <Card.Title>SIGN-UP FORM</Card.Title>
           <Form className="mt-2">
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -27,7 +28,7 @@ const Signup = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" block>
               Submit
             </Button>
           </Form>
