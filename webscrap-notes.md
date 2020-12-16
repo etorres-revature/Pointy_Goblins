@@ -117,19 +117,19 @@ Details__sleeps
 ## SONDERS.COM
 
 ### AUSTIN
+resultsListScrollContainer
+SearchResultCard-module__card_container___nttr9
+LINK : Link-module__base___1ypHw
 
-`https://www.sonder.com/destinations/austin/search?sleeps=1&neighborhood=%22all_neighborhoods%22&bedroom_count=0&bed_count=1&bathroom_count=1`
+TITLE: SearchResultCard-module__title_row___2Ytju
+DESCRIPTION: SearchResultCard-module__stats___1sn4g
+PRICE :SearchResultCard-module__prices_row___1V0mu
+IMAGE:SearchResultCard-module__post_image___1wRUp
+LOCATION: SearchResultCard-module__neighborhood_row___28cV4
 
-CONTAINER: `<div class="Column-module__column___R-LzP Column-module__align_items_center___1L1Uc Column-module__justify_content_start___a1-eO Column-module__half___1vH7z" target="listing_20014">`
-
-IMAGE: `<img class="Image-module__image___357yU SearchResultCard-module__post_image___1wRUp" src="https://res.cloudinary.com/sonder-development/image/private/s--Rp5XT_EV--/c_fill,w_800/v1/s3assets/unit_images/images/000/078/369/original/jREWa5yt.jpg?1536853484" alt="Lovely 2BR at Bouldin Townhome">`
 
 
 
-DESCRIPTION: `<p class="Text-module__base___3jyR6 Text-module__h5___1Xaez Text-module__title___1nEqH Text-module__truncate___3XwKg">Lovely 2BR at Bouldin Townhome</p>`
 
-LOCATION: `<p class="Text-module__base___3jyR6 Text-module__h5___1Xaez Text-module__title___1nEqH Text-module__truncate___3XwKg">Lovely 2BR at Bouldin Townhome</p>`
 
-PRICE: <p class="Text-module__base___3jyR6 Text-module__body___tXgxC">US$117</p>
 
-LINK: `<a class="Link-module__base___1ypHw" href="/destinations/austin/Sonder-Bouldin-Townhome-Lovely-2BR-Patio/c20014?sleeps=1" target="_blank" data-testid="SearchResultCard-listing_url">`
