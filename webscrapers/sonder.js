@@ -4,6 +4,18 @@ const puppeteer = require('puppeteer');
 // main url for fetch all the html from 
 const url = 'https://www.sonder.com/destinations/austin/search?sleeps=1&neighborhood=%22all_neighborhoods%22&bedroom_count=0&bed_count=1&bathroom_count=1'
 
+// SAMPLE OUTPUT
+// {
+//   source: 'sonder',
+//   location: 'Bouldin, Austin',
+//   title: 'Sleek Studio at The Catherine ',
+//   description: 'Studio·2 Guests·1 Bathroom',
+//   price: '121',
+//   link: 'https://sonder/destinations/austin/Sonder-Studio-in-Bouldin-Weekly-Specials/c28110?sleeps=1',
+//   image: 'https://res.cloudinary.com/sonder-development/image/private/s--Rp5XT_EV--/c_fill,w_800/v1/s3assets/unit_images/images/000/209/647/original/EU_E5BON.jpg?1575138028'
+// }
+
+
 
 
 function getData(){
@@ -18,7 +30,7 @@ return new Promise ((resolve,reject)=>{
 // function using axios to fetch the main url page for a the given city 
 async function getMainPage(url) {
   try {
-    const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch({headless: true});
     const [page] = await browser.pages();
     await page.setViewport({
       width: 1900,
