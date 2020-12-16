@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 // main url for fetch all the html from 
-const url = 'https://www.vrbo.com/search/keywords:austin-texas-united-states-of-america/arrival:2020-12-22/departure:2021-01-27?petIncluded=false'
+// const url = 'https://www.vrbo.com/search/keywords:austin-texas-united-states-of-america/arrival:2020-12-22/departure:2021-01-27?petIncluded=false'
 
 
 // SAMPLE OUTPUT
@@ -20,7 +20,8 @@ const url = 'https://www.vrbo.com/search/keywords:austin-texas-united-states-of-
 
 
 
-function getData(){
+function getData(city){
+  const url = `https://www.vrbo.com/search/keywords:${city}`
 return new Promise ((resolve,reject)=>{
   getMainPage(url).then((html)=>{
   const Obj = parseHTML(html)
@@ -40,8 +41,8 @@ async function getMainPage(url) {
       deviceScaleFactor: 1,
     });
 
-    await page.goto('https://www.vrbo.com/search/keywords:austin-texas-united-states-of-america/arrival:2020-12-22/departure:2021-01-27?petIncluded=false', 
-    { waitUntil: 'networkidle0' });
+    
+    await page.goto(url, { waitUntil: 'networkidle0' });
     const data = await page.evaluate(() => document.querySelector('*').outerHTML);
 
 

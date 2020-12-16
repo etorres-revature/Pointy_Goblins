@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 // main url for fetch all the html from 
-const url = 'https://www.airbnb.com/s/austin/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&source=structured_search_input_header&search_type=search_query'
+// const url = 'https://www.airbnb.com/s/austin/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&source=structured_search_input_header&search_type=search_query'
 
 
 // main function that is exported for use 
@@ -18,7 +18,12 @@ const url = 'https://www.airbnb.com/s/austin/homes?tab_id=home_tab&refinement_pa
 //   image: 'https://a0.muscache.com/im/pictures/4596765/80c96bbd_original.jpg?im_w=720'
 // }
 
-function getData(){
+function getData(city){
+  console.log('------CITY---------')
+  console.log(city)
+  const url=`https://www.airbnb.com/s/${city}/homes?`
+  console.log('------URL---------')
+  console.log(url)
 return new Promise ((resolve,reject)=>{
   getMainPage(url).then((html)=>{
   const Obj = parseHTML(html)
@@ -41,19 +46,28 @@ console.log(error)
 
 // function parses the html from the axios call and parse it for the requied fields.It constructs a JSON object to be returned 
 function parseHTML (html) {
- 
+
   const dataArray=[]
   const $ = cheerio.load(html)
   const locationStr=$(html).find('._1lbq8dg').find('h1').text()
   const location=locationStr.split('Stays in ')
 
   $('._8ssblpx').each((index,element)=>{ 
+    
+    // USED FOR TROUBLSHOOTING SELECTORS
+    // console.log('------ELEMENT-------')
+    // const d = $(element).html()
+    // console.log(d)
+
   const title=$(element).find('._bzh5lkq').text()
   const description=$(element).find('._kqh46o').text()
   const priceStr=$(element).find('._1p7iugi').html()
   const price=priceStr.split('</span>$')
-  const link=$(element).find('._1048zci').find('a').attr('href')
-  const image=$(element).find('._1048zci').find('img').attr('src')
+  const link=$(element).find('._8s3ctt').find('a').attr('href')
+  const image=$(element).find('._4626ulj').find('img').attr('src')
+// Previous working image selector 
+  //const image=$(element).find('._1048zci').find('img').attr('src')
+ 
   dataObj = {
     source: 'airbnb',
     location: location[1],

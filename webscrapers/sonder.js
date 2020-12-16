@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 // main url for fetch all the html from 
-const url = 'https://www.sonder.com/destinations/austin/search?sleeps=1&neighborhood=%22all_neighborhoods%22&bedroom_count=0&bed_count=1&bathroom_count=1'
+// const url = 'https://www.sonder.com/destinations/austin/search?sleeps=1&neighborhood=%22all_neighborhoods%22&bedroom_count=0&bed_count=1&bathroom_count=1'
 
 // SAMPLE OUTPUT
 // {
@@ -18,7 +18,8 @@ const url = 'https://www.sonder.com/destinations/austin/search?sleeps=1&neighbor
 
 
 
-function getData(){
+function getData(city){
+  const url = `https://www.sonder.com/destinations/${city}/search?`
 return new Promise ((resolve,reject)=>{
   getMainPage(url).then((html)=>{
   const Obj = parseHTML(html)
