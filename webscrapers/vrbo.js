@@ -2,11 +2,26 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 // main url for fetch all the html from 
-const url = 'https://www.vrbo.com/search/keywords:austin-texas-united-states-of-america/arrival:2020-12-22/departure:2021-01-27?petIncluded=false'
+// const url = 'https://www.vrbo.com/search/keywords:austin-texas-united-states-of-america/arrival:2020-12-22/departure:2021-01-27?petIncluded=false'
+
+
+// SAMPLE OUTPUT
+// {
+//   source: 'vrbo',
+//   location: '3.2 mi to Austin center',
+//   title: 'Modern, private guest house with WiFi, kitchenette, and private entrance!',
+//   description: 'null 1 BA null Sleeps 4',
+//   price: '65',
+//   link: 'https://www.vrbo.com/2043618?unitId=2608138&arrival=2020-12-22&departure=2021-01-27',
+//   image: 'https://odis.homeaway.com/odis/listing/2a128d81-5c87-4f0b-9104-074fd9ddef9b.c6.jpg'
+// }
 
 
 
-function getData(){
+
+
+function getData(city){
+  const url = `https://www.vrbo.com/search/keywords:${city}`
 return new Promise ((resolve,reject)=>{
   getMainPage(url).then((html)=>{
   const Obj = parseHTML(html)
@@ -26,8 +41,8 @@ async function getMainPage(url) {
       deviceScaleFactor: 1,
     });
 
-    await page.goto('https://www.vrbo.com/search/keywords:austin-texas-united-states-of-america/arrival:2020-12-22/departure:2021-01-27?petIncluded=false', 
-    { waitUntil: 'networkidle0' });
+    
+    await page.goto(url, { waitUntil: 'networkidle0' });
     const data = await page.evaluate(() => document.querySelector('*').outerHTML);
 
 
@@ -40,15 +55,7 @@ async function getMainPage(url) {
   }
 }
 
-  // try{
-//  const response = await axios.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1' }  })
-//  return response.data
-// //  return data = parseHTML(HTML)
- 
-// }
-// catch (error){
-// console.log(error)
-// }}
+
 
 // function parses the html from the axios call and parse it for the requied fields.It constructs a JSON object to be returned 
 function parseHTML (html) {
@@ -56,11 +63,6 @@ function parseHTML (html) {
 
 
   const $ = cheerio.load(html)
-  // console.log(html)
-  // console.log('-------START--------------')
-  // const test = $('.Hit').html()
-  // console.log(test)
-  // console.log('-----------END----------')
 
   $('.Hit').each((index,element)=>{
      const title = $(element).find('.HitInfo__headline').text()
@@ -77,13 +79,6 @@ function parseHTML (html) {
     const priceSrt = $(element).find('.DualPrice__amount').html()
     const price = priceSrt.replace('$','')
     const location = $(element).find('.GeoDistance__text').text()
-
-    // console.log('---------------------')
-    
-    // console.log(title)
-    // console.log(description)
-    // console.log(price)
-    // console.log(image)
 
       dataObj = {
     source: 'vrbo',
