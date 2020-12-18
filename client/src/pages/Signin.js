@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Card, Form, Button } from "react-bootstrap";
+import { set } from "mongoose";
 
 const Signin = () => {
+
+  const [user, setUser ] = useState({});
+
+  function handleUserSubmit(event) {
+    event.preventDefault();
+    console.log(user);
+  }
+
+  function updateUserCredentials(event) {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value })
+  }
+ 
+
   return (
     <Container className="mt-4">
       <div className="mb-4">
@@ -18,20 +33,30 @@ const Signin = () => {
         <Card.Title>SIGN-IN FORM</Card.Title>
 
         <Form className="mt-2">
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group onChange={updateUserCredentials} controlId="formBasicEmail">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control name="firstName" type="text" placeholder="Enter first name" />
+          </Form.Group>
+
+          <Form.Group onChange={updateUserCredentials} controlId="formBasicEmail">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control name="lastName" type="text" placeholder="Enter last name" />
+          </Form.Group>
+
+          <Form.Group onChange={updateUserCredentials} controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control name="email" type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group  onChange={updateUserCredentials} controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control name="password" type="password" placeholder="Password" />
           </Form.Group>
 
-          <Button variant="primary" type="submit" block>
+          <Button variant="primary" onClick={handleUserSubmit} type="submit" block>
             Submit
           </Button>
         </Form>
