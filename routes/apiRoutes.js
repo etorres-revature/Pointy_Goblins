@@ -1,14 +1,22 @@
 const db = require("../models");
-const path = require("path");
+const bcrypt = require("bcrypt");
+const passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = (app) => {
 
-    app.get("/", (request, response) => {
-        response.sendFile(path.join(__dirname, "../client/public/index.html"))
-    })
+    app.post("/api/createUser", (request, response) => {
+        request.body.password = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10), null);
 
-    app.get("/signin", (request, response) => {
-        response.sendFile(path.join(__dirname, "../client/public/index.html"))
-    })
+        db.User.create(request.body).then(result => {
+            response.json(result)
+        }).catch(err => {
+            response.status(422).json(err);
+        });
+    });
+
+    app.post("/api/signin", passport.authenticate("local"), (request, response) => {
+        response.json(request.user);
+    });
 }
 
