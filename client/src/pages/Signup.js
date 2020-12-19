@@ -22,7 +22,7 @@ const Signup = () => {
         email: "",
         password: ""
       })).then(res=> {
-        console.log("created", res);
+        window.location.replace("/signin");
       }).catch(err => {
         console.log(err);
       })

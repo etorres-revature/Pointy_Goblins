@@ -16,7 +16,12 @@ const Signin = () => {
   function onSubmit(event) {
     event.preventDefault();
     API.findUser(user).then(res => {
-      console.log(res);
+      setUser({
+        email: "",
+        password: ""
+      });
+
+      window.location.replace("/landing");
     })
   }
 
@@ -36,7 +41,7 @@ const Signin = () => {
         <Form className="mt-2">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control onChange={updateUserCredentials} name="email" type="email" placeholder="Enter email" />
+            <Form.Control onChange={updateUserCredentials} value={user.email} name="email" type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -44,7 +49,7 @@ const Signin = () => {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control onChange={updateUserCredentials} name="password" type="password" placeholder="Password" />
+            <Form.Control onChange={updateUserCredentials} name="password" value={user.password} type="password" placeholder="Password" />
           </Form.Group>
 
           <Button variant="primary" onClick={onSubmit} type="submit" block>
