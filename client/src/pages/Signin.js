@@ -1,30 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Container, Card, Form, Button } from "react-bootstrap";
-import { set } from "mongoose";
-import API from "../utils/API";
+import { useAuth } from "../utils/authContext";
+
 
 const Signin = () => {
+const auth = useAuth();
 
-  const [user, setUser] = useState({});
+  const [formData, setFormData] = useState({});
+  const history = useHistory();
 
   function updateUserCredentials(event) {
     const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
+    setFormData({ ...formData, [name]: value });
   }
 
-  function onSubmit(event) {
+  const onSubmit = event => {
     event.preventDefault();
-    API.findUser(user).then(res => {
-      setUser({
-        email: "",
-        password: ""
-      });
+    auth.signin(formData.email, formData.password, () => {
+      console.log("testing");
+      history.push("/landing");
+    });
 
-      window.location.replace("/landing");
-    })
   }
-
+//history.push("/landing");
   return (
     <Container className="mt-4">
       <div className="mb-4">
@@ -41,7 +40,7 @@ const Signin = () => {
         <Form className="mt-2">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control onChange={updateUserCredentials} value={user.email} name="email" type="email" placeholder="Enter email" />
+            <Form.Control onChange={updateUserCredentials} value={formData.email} name="email" type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -49,7 +48,7 @@ const Signin = () => {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control onChange={updateUserCredentials} name="password" value={user.password} type="password" placeholder="Password" />
+            <Form.Control onChange={updateUserCredentials} name="password" value={formData.password} type="password" placeholder="Password" />
           </Form.Group>
 
           <Button variant="primary" onClick={onSubmit} type="submit" block>

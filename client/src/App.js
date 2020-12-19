@@ -1,5 +1,5 @@
-import { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import STRNavbar from "./components/layout/STRNavbar";
 import Signup from "./pages/Signup";
@@ -8,30 +8,42 @@ import Landing from "./pages/Landing";
 import Search from "./pages/Search";
 import Team from "./pages/Team";
 import "./App.css";
+import { ProvideAuth, useAuth } from "./utils/authContext";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-    };
+  function PrivateRoute({ children, ...rest }) {
+    const auth = useAuth();
+    console.log("this is the auth", auth);
+
+      return (
+        <Route {...rest}
+          render={({ location }) => auth.user ? (children) 
+            :
+             (<Redirect to={{pathname: "/signin", state: { from: location } }}/>)}/> );
   }
 
-  render() {
+  function App() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
+
     return (
+      <ProvideAuth>
       <Router>
         <STRNavbar />
         <Container className="p-0" fluid={"true"}>
           <Switch>
-            <Route exact path="/" render={() => <Signup />} />
-            <Route exact path="/signin" render={() => <Signin />} />
-            <Route exact path="/landing" render={() => <Landing />} />
-            <Route exact path="/search" render={() => <Search />} />
-            <Route exact path="/team" render={() => <Team />} />
+
+            <Route exact path="/signin" render={() => <Signin />}/> 
+            <Route exact path="/" render={() => <Signup />} /> 
+
+            <PrivateRoute exact path="/landing" > <Landing /> </PrivateRoute>
+            <PrivateRoute exact path="/search" ><Search /> </PrivateRoute>
+            <PrivateRoute exact path="/team"><Team /> </PrivateRoute>
+            
           </Switch>
         </Container>
       </Router>
+      </ProvideAuth>
     );
   }
-}
 
 export default App;

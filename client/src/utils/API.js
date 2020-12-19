@@ -6,6 +6,9 @@ const API =  {
     },
     findUser: function(user) {
         return axios.post("/api/signin", user);
+    },
+    login: function() {
+
     }
 }
 
