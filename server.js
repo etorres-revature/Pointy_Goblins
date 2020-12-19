@@ -1,6 +1,6 @@
 
 const express = require("express")
-const express = require ("express-session")
+const session = require ("express-session")
 const passport = require("./config/passport")
 const logger = require("morgan")
 const mongoose = require("mongoose")
@@ -8,7 +8,7 @@ const compression = require("compression")
 
 const dotenv = require("dotenv").config();
 
-const PORT = process.env.PORT || 52691
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
@@ -25,16 +25,20 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/vacationrental", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
-  });
+  } );
   
   // routes
   require("./routes/apiRoutes")(app);
+  require("./routes/htmlRoutes")(app);
   // require("./routes/htmlRoutes")(app);
   
   app.listen(PORT, () => {
