@@ -9,6 +9,9 @@ const API =  {
     },
     login: function() {
 
+    },
+    getRentals: function(city) {
+        return axios.get("/api/" + city);
     }
 }
 

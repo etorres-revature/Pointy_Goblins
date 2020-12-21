@@ -1,7 +1,7 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
 const passport = require("../config/passport");
-const isAuthenticated = require("../config/middleware/isAuthenticated");
+const airbnb = require("../webscrapers/airbnb");
 
 module.exports = (app) => {
 
@@ -18,5 +18,16 @@ module.exports = (app) => {
     app.post("/api/signin", passport.authenticate("local"), (request, response) => {
         response.json(request.user);
     });
+
+    //airbnb route
+    app.get("/api/:city", (req, res) =>{
+        // console.log("$$$$$$$$$$$$$$$", req.params);
+        airbnb.getData(req.params.city).then((data) => {
+            return res.json(data);
+          })
+          .catch((err) => console.log(err));
+        // vrbo.getData("austin");
+        // sonder.getData("austin");
+      });
 }
 

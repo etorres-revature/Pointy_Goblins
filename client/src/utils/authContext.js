@@ -21,13 +21,9 @@ function useProvideAuth() {
 
   const signin = (email, password, cb) => {
     return API.findUser({email, password}).then(res => {
-        console.log(res);
-
         setUser(res.data);
 
         cb();
-        // console.log("hi");
-        // window.location.replace("/landing");
       });
   };
 

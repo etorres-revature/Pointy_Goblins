@@ -12,7 +12,6 @@ import { ProvideAuth, useAuth } from "./utils/authContext";
 
   function PrivateRoute({ children, ...rest }) {
     const auth = useAuth();
-    console.log("this is the auth", auth);
 
       return (
         <Route {...rest}
