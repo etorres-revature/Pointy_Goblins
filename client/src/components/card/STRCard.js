@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "./Card.css";
@@ -9,11 +9,10 @@ const STRCard = (props) => {
   const history = useHistory();
 
   function renderListings (event) {
-    // event.target.name
-
     API.getRentals(event.target.name).then(results => {
       console.log(results);
-    })
+      
+    });
 
      history.push("/api/" + event.target.name);
   }

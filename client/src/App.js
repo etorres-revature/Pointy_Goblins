@@ -35,6 +35,7 @@ import { ProvideAuth, useAuth } from "./utils/authContext";
             <Route exact path="/" render={() => <Signup />} /> 
 
             <PrivateRoute exact path="/landing" > <Landing /> </PrivateRoute>
+            <PrivateRoute exact path="/api/:city" > <h1>Hi there</h1> </PrivateRoute>
             <PrivateRoute exact path="/search" ><Search /> </PrivateRoute>
             <PrivateRoute exact path="/team"><Team /> </PrivateRoute>
             
