@@ -9,41 +9,53 @@ import Search from "./pages/Search";
 import Team from "./pages/Team";
 import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
+import ListingContext from "./utils/ListingContext";
 
-  function PrivateRoute({ children, ...rest }) {
-    const auth = useAuth();
-    console.log("this is the auth", auth);
+function PrivateRoute({ children, ...rest }) {
+  const auth = useAuth();
 
-      return (
-        <Route {...rest}
-          render={({ location }) => auth.user ? (children) 
-            :
-             (<Redirect to={{pathname: "/signin", state: { from: location } }}/>)}/> );
-  }
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => (auth.user ? children : <Redirect to={{ pathname: "/signin", state: { from: location } }} />)}
+    />
+  );
+}
 
-  function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    return (
-      <ProvideAuth>
-      <Router>
-        <STRNavbar />
-        <Container className="p-0" fluid={"true"}>
-          <Switch>
+  const [city, setCity] = useState("");
+  const [listings, setListings] = useState([]);
 
-            <Route exact path="/signin" render={() => <Signin />}/> 
-            <Route exact path="/" render={() => <Signup />} /> 
-
-            <PrivateRoute exact path="/landing" > <Landing /> </PrivateRoute>
-            <PrivateRoute exact path="/search" ><Search /> </PrivateRoute>
-            <PrivateRoute exact path="/team"><Team /> </PrivateRoute>
-            
-          </Switch>
-        </Container>
-      </Router>
-      </ProvideAuth>
-    );
-  }
+  return (
+    <ProvideAuth>
+      <ListingContext.Provider value={{ city, listings, setCity, setListings }}>
+        <Router>
+          <STRNavbar />
+          <Container className="p-0" fluid={"true"}>
+            <Switch>
+              <Route exact path="/signin" render={() => <Signin />} />
+              <Route exact path="/" render={() => <Signup />} />
+              <PrivateRoute exact path="/landing">
+                <Landing />
+              </PrivateRoute>
+              <PrivateRoute exact path="/api/:city">
+                <h1>Hi there</h1>
+              </PrivateRoute>
+              <PrivateRoute exact path="/search">
+                <Search />
+              </PrivateRoute>
+              <PrivateRoute exact path="/team">
+                <Team />
+              </PrivateRoute>
+            </Switch>
+          </Container>
+        </Router>
+      </ListingContext.Provider>
+    </ProvideAuth>
+  );
+}
 
 export default App;

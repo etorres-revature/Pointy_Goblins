@@ -1,7 +1,24 @@
-import React from "react";
+import { React, useContext, useEffect } from "react";
+import ListingContext from "../utils/ListingContext";
+import API from "../utils/API";
 
 const Search = () => {
-  return <div>Search Page</div>;
+  const { city, listings, setListings } = useContext(ListingContext);
+  console.log("🚀 ~ file: Search.js ~ line 6 ~ Search ~ city", city);
+
+  useEffect(() => {
+    API.getRentals(city).then((results) => {
+      console.log(results);
+      setListings(results);
+      console.log("🚀 ~ file: Search.js ~ line 6 ~ Search ~ listings", listings);
+    });
+  });
+
+  return (
+    <div>
+      <p></p>Search Page
+    </div>
+  );
 };
 
 export default Search;

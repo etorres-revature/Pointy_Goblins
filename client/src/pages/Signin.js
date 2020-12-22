@@ -18,7 +18,6 @@ const auth = useAuth();
   const onSubmit = event => {
     event.preventDefault();
     auth.signin(formData.email, formData.password, () => {
-      console.log("testing");
       history.push("/landing");
     });
 
