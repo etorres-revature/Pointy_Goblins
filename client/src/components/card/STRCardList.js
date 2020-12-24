@@ -3,7 +3,8 @@ import STRCard from "./STRCard";
 import "./CardList.css"
 
 const CardList = (props) => {
-
+console.log('CARDLIST')
+console.log(props)
 
   return (
     <div className="cardList">

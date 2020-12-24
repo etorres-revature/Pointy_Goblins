@@ -21,6 +21,7 @@ const cheerio = require('cheerio');
 function getData(city){
   console.log('------CITY---------')
   console.log(city)
+
   const url=`https://www.airbnb.com/s/${city}/homes?`
   console.log('------URL---------')
   console.log(url)
