@@ -34,19 +34,19 @@ module.exports = (app) => {
   const getAllListings = async (location) => {
     let allData = [];
     const city = location.toLowerCase();
-    // const vrboData = await vrbo.getData(city)
-    // // console.log('---------VRBO---------')
-    // // console.log(vrboData)
-    // const sonderData = await sonder.getData(city)
-    // // console.log('---------SONDERS---------')
-    // // console.log(sonderData)
+    const vrboData = await vrbo.getData(city);
+    // console.log('---------VRBO---------')
+    // console.log(vrboData)
+    const sonderData = await sonder.getData(city);
+    // console.log('---------SONDERS---------')
+    // console.log(sonderData)
 
     const airbnbData = await airbnb.getData(city);
     // console.log('---------AIRBNB---------')
     // console.log(airbnbData)
     allData.push(...airbnbData);
-    // allData.push(...vrboData);
-    // allData.push(...sonderData);
+    allData.push(...vrboData);
+    allData.push(...sonderData);
     return allData;
   };
 
@@ -57,15 +57,5 @@ module.exports = (app) => {
       console.log(data);
       return res.json(data);
     });
-
-    // vrbo
-    //   .getData(req.params.city)
-    //   .then((data) => {
-    //     return res.json(data);
-    //   })
-    //   .catch((err) => console.log(err));
-
-    // vrbo.getData("austin");
-    // sonder.getData("austin");
   });
 };
