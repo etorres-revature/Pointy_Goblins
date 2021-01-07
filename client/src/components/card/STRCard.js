@@ -7,6 +7,8 @@ import API from "../../utils/API";
 import ListingContext from "../../utils/ListingContext";
 import Redirect from "react";
 
+// for landing page search options
+
 const STRCard = (props) => {
   const history = useHistory();
 
@@ -25,7 +27,12 @@ const STRCard = (props) => {
           {props.city.city}
         </Button>
       </Card.Body>
-      <Card.Img className="image" variant="bottom" alt={props.city.city + " skyline"} src={props.city.img} />
+      <Card.Img
+        className="image"
+        variant="bottom"
+        alt={props.city.city + " skyline"}
+        src={props.city.img}
+      />
     </Card>
     // </ListingContext.Consumer>
   );
