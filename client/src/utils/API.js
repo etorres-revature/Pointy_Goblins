@@ -12,6 +12,15 @@ const API =  {
     },
     getRentals: function(city) {
         return axios.get("/api/" + city);
+    },
+    saveListing: function(listingInfo) {
+        return axios.post("/api/addToFavorites", listingInfo);
+    },
+    getFavorites: function() {
+        return axios.get("/api/favorites");
+    },
+    deleteFavListing: function(id) {
+        return axios.delete("/api/delete/" + id)
     }
 }
 

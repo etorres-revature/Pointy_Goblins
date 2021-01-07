@@ -22,33 +22,57 @@ module.exports = (app) => {
       });
   });
 
-  app.post(
-    "/api/signin",
-    passport.authenticate("local"),
-    (request, response) => {
-      response.json(request.user);
-    }
-  );
 
-  //GET ALL DATA
-  const getAllListings = async (location) => {
-    let allData = [];
-    const city = location.toLowerCase();
-    const vrboData = await vrbo.getData(city);
-    // console.log('---------VRBO---------')
-    // console.log(vrboData)
-    const sonderData = await sonder.getData(city);
-    // console.log('---------SONDERS---------')
-    // console.log(sonderData)
+  app.post("/api/signin", passport.authenticate("local"), (request, response) => {
+    response.json(request.user);
+  });
 
-    const airbnbData = await airbnb.getData(city);
-    // console.log('---------AIRBNB---------')
-    // console.log(airbnbData)
-    allData.push(...airbnbData);
-    allData.push(...vrboData);
-    allData.push(...sonderData);
-    return allData;
-  };
+  app.post("/api/addToFavorites", (req, res) => {
+    db.FavoriteListing.create(req.body).then(result => {
+      res.json(result);
+    }).catch(err => {
+      console.log(err);
+    });
+  });
+
+  app.get("/api/favorites", (req, res) => {
+    db.FavoriteListing.find().then(result => {
+      res.json(result);
+    }).catch(err => {
+      console.log(err);
+    })
+  });
+  
+  app.delete("/api/delete/:id", (req, res) => {
+    db.FavoriteListing.findOneAndDelete({ "_id": req.params.id }).then(result => {
+      res.json(result);
+    }).catch(err => {
+      console.log(err);
+    })
+  })
+
+  //GET ALL DATA 
+const getAllListings =  async (location)=>{
+  let allData = []
+  const city = location.toLowerCase()
+  const vrboData = await vrbo.getData(city)
+  // console.log('---------VRBO---------')
+  // console.log(vrboData)
+  const sonderData = await sonder.getData(city)
+  // console.log('---------SONDERS---------')
+  // console.log(sonderData)
+
+  const airbnbData = await airbnb.getData(city)
+  // console.log('---------AIRBNB---------')
+  // console.log(airbnbData)
+  allData.push(...airbnbData)
+  allData.push(...vrboData)
+  allData.push(...sonderData)
+  return allData
+
+}
+
+
 
   app.get("/api/:city", (req, res) => {
     // console.log("$$$$$$$$$$$$$$$", req.params);

@@ -7,6 +7,7 @@ import Signin from "./pages/Signin";
 import Landing from "./pages/Landing";
 import Search from "./pages/Search";
 import Team from "./pages/Team";
+import Favorites from "./pages/Favorites";
 import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
@@ -46,6 +47,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute exact path="/search">
                 <Search />
+              </PrivateRoute>
+              <PrivateRoute exact path="/favorites">
+                <Favorites />
               </PrivateRoute>
               <PrivateRoute exact path="/team">
                 <Team />
