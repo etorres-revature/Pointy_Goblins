@@ -31,7 +31,8 @@ return new Promise ((resolve,reject)=>{
 // function using axios to fetch the main url page for a the given city 
 async function getMainPage(url) {
   try {
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: true, 
+    args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const [page] = await browser.pages();
     await page.setViewport({
       width: 1900,
