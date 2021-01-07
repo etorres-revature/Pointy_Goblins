@@ -18,6 +18,9 @@ const API =  {
     },
     getFavorites: function() {
         return axios.get("/api/favorites");
+    },
+    deleteFavListing: function(id) {
+        return axios.delete("/api/delete/" + id)
     }
 }
 

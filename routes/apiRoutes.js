@@ -36,7 +36,15 @@ module.exports = (app) => {
     }).catch(err => {
       console.log(err);
     })
-  })  
+  });
+  
+  app.delete("/api/delete/:id", (req, res) => {
+    db.FavoriteListing.findOneAndDelete({ "_id": req.params.id }).then(result => {
+      res.json(result);
+    }).catch(err => {
+      console.log(err);
+    })
+  })
 
   //GET ALL DATA 
 const getAllListings =  async (location)=>{
