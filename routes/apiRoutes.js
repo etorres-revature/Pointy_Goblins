@@ -25,13 +25,13 @@ module.exports = (app) => {
   //GET ALL DATA 
 const getAllListings =  async (location)=>{
   let allData = []
-  const city = location.toLowerCase()
-  const vrboData = await vrbo.getData(city)
-  // console.log('---------VRBO---------')
-  // console.log(vrboData)
-  const sonderData = await sonder.getData(city)
-  // console.log('---------SONDERS---------')
-  // console.log(sonderData)
+  // const city = location.toLowerCase()
+  // const vrboData = await vrbo.getData(city)
+  // // console.log('---------VRBO---------')
+  // // console.log(vrboData)
+  // const sonderData = await sonder.getData(city)
+  // // console.log('---------SONDERS---------')
+  // // console.log(sonderData)
 
   const airbnbData = await airbnb.getData(city)
   // console.log('---------AIRBNB---------')
