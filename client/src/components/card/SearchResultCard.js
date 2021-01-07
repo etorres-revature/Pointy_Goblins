@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
+import API from "../../utils/API";
 
 export default function SearchResultCard({ listingDetails }) {
-  console.log("I'm in a search result card!");
+  
   {
-    console.log(listingDetails);
+    console.log("$$$$$$$$$$$$", listingDetails);
+  }
+
+  const [clicked, setClicked] = useState(false);
+
+  function addToFavorites() {
+    API.saveListing({
+      title: listingDetails.title,
+      location: listingDetails.location,
+      description: listingDetails.description,
+      source: listingDetails.source,
+      link: listingDetails.link,
+      image: listingDetails.image,
+      price: listingDetails.price
+    }).then(() => {
+      console.log("success");
+      setClicked(true);
+    }).catch(err => {
+      console.log(err);
+    })
+    
   }
 
   return (
@@ -22,7 +43,7 @@ export default function SearchResultCard({ listingDetails }) {
         <Button variant="primary" target="_blank" href={listingDetails.link}>
           See listing on {listingDetails.source}
         </Button>
-        <Button variant="secondary m-2">Add to Favorites</Button>
+        <Button onClick={addToFavorites} disabled={clicked} variant="secondary m-2">Add to Favorites</Button>
       </Card.Body>
     </Card>
   );

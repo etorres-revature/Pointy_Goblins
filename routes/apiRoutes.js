@@ -22,6 +22,22 @@ module.exports = (app) => {
     response.json(request.user);
   });
 
+  app.post("/api/addToFavorites", (req, res) => {
+    db.FavoriteListing.create(req.body).then(result => {
+      res.json(result);
+    }).catch(err => {
+      console.log(err);
+    });
+  });
+
+  app.get("/api/favorites", (req, res) => {
+    db.FavoriteListing.find().then(result => {
+      res.json(result);
+    }).catch(err => {
+      console.log(err);
+    })
+  })  
+
   //GET ALL DATA 
 const getAllListings =  async (location)=>{
   let allData = []

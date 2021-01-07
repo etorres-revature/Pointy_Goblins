@@ -3,9 +3,7 @@ import { Card, Button, CardColumns, Row } from "react-bootstrap";
 import SearchResultCard from "../card/SearchResultCard";
 
 export default function STRresults(props) {
-  console.log("------THIS IS PROPS--------");
-  console.log(props);
-  console.log(props.list.data);
+
   return (
     <div>
       {props.list.data === undefined ? (
