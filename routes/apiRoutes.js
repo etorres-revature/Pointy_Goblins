@@ -3,11 +3,15 @@ const bcrypt = require("bcrypt");
 const passport = require("../config/passport");
 const airbnb = require("../webscrapers/airbnb");
 const vrbo = require("../webscrapers/vrbo");
-const sonder = require("../webscrapers/sonder")
+const sonder = require("../webscrapers/sonder");
 
 module.exports = (app) => {
   app.post("/api/createUser", (request, response) => {
-    request.body.password = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10), null);
+    request.body.password = bcrypt.hashSync(
+      request.body.password,
+      bcrypt.genSaltSync(10),
+      null
+    );
 
     db.User.create(request.body)
       .then((result) => {
@@ -17,6 +21,7 @@ module.exports = (app) => {
         response.status(422).json(err);
       });
   });
+
 
   app.post("/api/signin", passport.authenticate("local"), (request, response) => {
     response.json(request.user);
@@ -68,22 +73,13 @@ const getAllListings =  async (location)=>{
 }
 
 
+
   app.get("/api/:city", (req, res) => {
     // console.log("$$$$$$$$$$$$$$$", req.params);
-    getAllListings(req.params.city).then((data)=>{
-      console.log('-------COMBINED-DATA-------')
-      console.log(data)
-      return res.json(data)
-    })
-    
-    // vrbo
-    //   .getData(req.params.city)
-    //   .then((data) => {
-    //     return res.json(data);
-    //   })
-    //   .catch((err) => console.log(err));
-
-    // vrbo.getData("austin");
-    // sonder.getData("austin");
+    getAllListings(req.params.city).then((data) => {
+      console.log("-------COMBINED-DATA-------");
+      console.log(data);
+      return res.json(data);
+    });
   });
 };

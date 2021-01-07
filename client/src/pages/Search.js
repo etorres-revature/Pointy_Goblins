@@ -12,6 +12,7 @@ const Search = () => {
     searchedCity.charAt(0).toUpperCase() + searchedCity.slice(1).toLowerCase();
 
   useEffect(() => {
+    setListings([]);
     API.getRentals(city).then((results) => {
       console.log(results);
       setListings(results);
