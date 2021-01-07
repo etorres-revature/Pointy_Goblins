@@ -4,10 +4,6 @@ import API from "../../utils/API";
 
 export default function SearchResultCard({ listingDetails }) {
   
-  {
-    console.log("$$$$$$$$$$$$", listingDetails);
-  }
-
   const [clicked, setClicked] = useState(false);
 
   function addToFavorites() {
