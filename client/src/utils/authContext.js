@@ -5,6 +5,7 @@ const authContext = createContext();
 
 function ProvideAuth({ children }) {
   const auth = useProvideAuth();
+  // auth.checkUserState();
   return (
     <authContext.Provider value={auth}>
       {children}
@@ -19,31 +20,46 @@ function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(null);
 
-  const signin = (email, password, cb) => {
-    return API.findUser({email, password}).then(res => {
-        setUser(res.data);
+  const checkUserState = () => {
+    const currentUser = localStorage.getItem("user")
 
-        cb();
-      });
+    if (currentUser != null) {
+      console.log("🚀 ~ file: authContext.js ~ line 23 ~ useProvideAuth ~ currentUser", currentUser)
+
+      setUser(JSON.parse(currentUser))
+    }
+  }
+
+
+
+  const signin = (email, password, cb) => {
+    return API.findUser({ email, password }).then(res => {
+      setUser(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data))
+      cb();
+    });
   };
 
-//   const signout = cb => {
-//     return fakeAuth.signout(() => {
-//       setUser(null);
-//       cb();
-//     });
-//   };
+  const signout = cb => {
+    return API.signOut().then((res) => {
+      localStorage.removeItem("user")
+      console.log(res);
+      setUser(null);
+      cb()
+    })
+  };
 
   return {
     user,
     signin,
-    // signout
+    signout,
+    checkUserState
   };
 }
 
 
 export {
-    ProvideAuth,
-    useAuth,
-    useProvideAuth
+  ProvideAuth,
+  useAuth,
+  useProvideAuth
 }

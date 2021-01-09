@@ -58,7 +58,7 @@ function App() {
                 <Team />
               </PrivateRoute>
               <PrivateRoute exact path="/logout">
-              <Logout></Logout>
+              <Logout />
               </PrivateRoute>
             </Switch>
           </Container>

@@ -21,6 +21,9 @@ const API =  {
     },
     deleteFavListing: function(id) {
         return axios.delete("/api/delete/" + id)
+    },
+    signOut: function(){
+        return axios.get("api/logout")
     }
 }
 
