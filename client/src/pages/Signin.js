@@ -7,7 +7,7 @@ import { useAuth } from "../utils/authContext";
 const Signin = () => {
 const auth = useAuth();
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({email:"", password:""});
   const history = useHistory();
 
   function updateUserCredentials(event) {
