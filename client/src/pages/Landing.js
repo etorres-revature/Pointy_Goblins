@@ -24,6 +24,9 @@ class Landing extends Component {
     return (
       <div>
         <STRCarousel />
+        <h2 className="d-flex justify-content-center my-2 font-weight-bold">
+          Choose a city to search for available rentals!
+        </h2>
         <STRCardList cities={this.state.buttons} />
       </div>
     );
