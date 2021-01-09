@@ -51,6 +51,12 @@ module.exports = (app) => {
     })
   })
 
+  app.get("/api/logout", (req, res) => {
+    req.logout();
+    res.json({message: "logged out"})
+  })
+
+
   //GET ALL DATA 
 const getAllListings =  async (location)=>{
   let allData = []
@@ -75,6 +81,7 @@ const getAllListings =  async (location)=>{
 
 
   app.get("/api/:city", (req, res) => {
+    // if(req.params.city === 'logout') next()
     // console.log("$$$$$$$$$$$$$$$", req.params);
     getAllListings(req.params.city).then((data) => {
       console.log("-------COMBINED-DATA-------");
