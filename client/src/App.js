@@ -11,6 +11,8 @@ import Favorites from "./pages/Favorites";
 import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
+import axios from "axios";
+import Logout from "./components/Logout/Logout"
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useAuth();
@@ -22,6 +24,7 @@ function PrivateRoute({ children, ...rest }) {
     />
   );
 }
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -53,6 +56,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute exact path="/team">
                 <Team />
+              </PrivateRoute>
+              <PrivateRoute exact path="/logout">
+              <Logout></Logout>
               </PrivateRoute>
             </Switch>
           </Container>
