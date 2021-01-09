@@ -23,7 +23,8 @@ const NoMatch = () => {
         right now. Let's get you{" "}
         <span role="img" aria-label="enFuego">
           🔥
-        </span>
+        </span>{" "}
+        again.
       </p>
       <Link to="/signin">
         <Button variant="primary">Back to Sign-in</Button>
