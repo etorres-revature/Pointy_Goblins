@@ -64,7 +64,7 @@ const getAllListings =  async (location)=>{
   
   switch (location){
     case "BOSTON":
-      const bostonData = await  db.Boston.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+      const bostonData = await  db.Boston.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
         try{
          return post
         }catch {(error)=>{
@@ -75,7 +75,7 @@ const getAllListings =  async (location)=>{
        return bostonData.results
 
     case "AUSTIN":
-      const austinData = await  db.Austin.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+      const austinData = await  db.Austin.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
       try{
         return post
       }catch {(error)=>{
@@ -86,7 +86,7 @@ const getAllListings =  async (location)=>{
       return austinData.results
 
     case "HOUSTON":
-      const houstonData = await  db.Houston.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+      const houstonData = await  db.Houston.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
       try{
         return post
       }catch {(error)=>{
@@ -97,8 +97,9 @@ const getAllListings =  async (location)=>{
       return houstonData.results
 
       case "DENVER":
-        const denverData = await  db.Denver.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+        const denverData = await  db.Denver.findOne( {}, {}, { sort: { 'createdAt' : -1 } },function(err, post) {
         try{
+          console.log(post)
           return post
         }catch {(error)=>{
           console.log(error)
