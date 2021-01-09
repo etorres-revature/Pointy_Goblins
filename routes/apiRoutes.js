@@ -53,23 +53,61 @@ module.exports = (app) => {
 
   //GET ALL DATA 
 const getAllListings =  async (location)=>{
-  let allData = []
-  const city = location.toLowerCase()
-  const vrboData = await vrbo.getData(city)
-  // console.log('---------VRBO---------')
-  // console.log(vrboData)
-  const sonderData = await sonder.getData(city)
-  // console.log('---------SONDERS---------')
-  // console.log(sonderData)
+  console.log('-------IN THE GET ALL LISTINGS FUCNTION -----')
+  console.log(location)
+  
+  switch (location){
+    case "BOSTON":
+      const bostonData = await  db.Boston.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+        try{
+         return post
+        }catch {(error)=>{
+          console.log(error)
+        }}
+        
+       });
+       return bostonData.results
 
-  const airbnbData = await airbnb.getData(city)
-  // console.log('---------AIRBNB---------')
-  // console.log(airbnbData)
-  allData.push(...airbnbData)
-  allData.push(...vrboData)
-  allData.push(...sonderData)
-  return allData
+    case "AUSTIN":
+      const austinData = await  db.Austin.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+      try{
+        return post
+      }catch {(error)=>{
+        console.log(error)
+      }}
+      
+      });
+      return austinData.results
 
+    case "HOUSTON":
+      const houstonData = await  db.Houston.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+      try{
+        return post
+      }catch {(error)=>{
+        console.log(error)
+      }}
+      
+      });
+      return houstonData.results
+
+      case "DENVER":
+        const denverData = await  db.Denver.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+        try{
+          return post
+        }catch {(error)=>{
+          console.log(error)
+        }}
+        
+        });
+        return denverData.results
+
+
+
+    default:
+      return 
+}
+
+  
 }
 
 
@@ -77,8 +115,8 @@ const getAllListings =  async (location)=>{
   app.get("/api/:city", (req, res) => {
     // console.log("$$$$$$$$$$$$$$$", req.params);
     getAllListings(req.params.city).then((data) => {
-      console.log("-------COMBINED-DATA-------");
-      console.log(data);
+      // console.log("-------Returned restuls-------");
+      // console.log(data);
       return res.json(data);
     });
   });
