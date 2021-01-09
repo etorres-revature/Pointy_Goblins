@@ -7,7 +7,7 @@ const compression = require("compression");
 
 const dotenv = require("dotenv").config();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 
 const app = express();
 

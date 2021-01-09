@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8081",
   "homepage": "https://quiet-tor-69912.herokuapp.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
