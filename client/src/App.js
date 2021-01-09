@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { Container } from "react-bootstrap";
 import STRNavbar from "./components/layout/STRNavbar";
 import Signup from "./pages/Signup";
@@ -8,11 +13,12 @@ import Landing from "./pages/Landing";
 import Search from "./pages/Search";
 import Team from "./pages/Team";
 import Favorites from "./pages/Favorites";
+import NoMatch from "./pages/NoMatch";
 import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
 import axios from "axios";
-import Logout from "./components/Logout/Logout"
+import Logout from "./components/Logout/Logout";
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useAuth();
@@ -20,11 +26,16 @@ function PrivateRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) => (auth.user ? children : <Redirect to={{ pathname: "/signin", state: { from: location } }} />)}
+      render={({ location }) =>
+        auth.user ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: "/signin", state: { from: location } }} />
+        )
+      }
     />
   );
 }
-
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -58,8 +69,9 @@ function App() {
                 <Team />
               </PrivateRoute>
               <PrivateRoute exact path="/logout">
-              <Logout />
+                <Logout />
               </PrivateRoute>
+              <Route render={() => <NoMatch />} />
             </Switch>
           </Container>
         </Router>
