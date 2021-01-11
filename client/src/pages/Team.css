@@ -1,6 +1,6 @@
 body{
     background:#eee;
-    margin-top:20px;
+    /* margin-top:20px; */
 }
 .img-thumbnail {
     padding: .25rem;
@@ -9,6 +9,7 @@ body{
     border-radius: .25rem;
     max-width: 100%;
     height: auto;
+    max-height: 350px;
 }
 
 .social-link {
