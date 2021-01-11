@@ -1,0 +1,9 @@
+img {
+    max-height: 375px;
+  height: auto;
+  width: 100%;
+}
+
+p {
+  font-size: 1.35rem;
+}
