@@ -1,25 +1,21 @@
-import {useEffect, useState} from "react"
-import {useHistory } from "react-router-dom"
+import { useEffect, useState, useHistory } from "react"
+import { useHistory } from "react-router-dom"
 import axios from "axios";
+import { useAuth } from "../../utils/authContext";
 
 const Logout = () => {
     const history = useHistory();
     const [error, setError] = useState(null)
 
+    const auth = useAuth();
+
     useEffect(() => {
-      axios.get('/api/logout').then((json) => {
-          console.log("json.data", json.data);
-        
-        // if (json.data.message === 'logged out') 
-        history.push('/signin')
-      }).catch(e => {
-        setError(e)
-        console.log("🚀 ~ file: Logout.js ~ line 17 ~ axios.get ~ e", e)
-      })
+        auth.signout(() => history.replace("/signin"));
+
     }, [])
     if (error) return <div>Unable to logout</div>
 
     return <></>
-  }
+}
 
-  export default Logout;
+export default Logout;
