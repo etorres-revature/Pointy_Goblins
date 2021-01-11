@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { ProvideAuth, useAuth } from "../../utils/authContext";
 
-
 const MyNavBar = () => {
   const auth = useAuth();
 
-const logoutLink = () => {
-<Link to = "/"></Link>
-}
+  const logoutLink = () => {
+    <Link to="/"></Link>;
+  };
   const authenticatedNavLinks = (
     <ProvideAuth>
       <Navbar className="border-bottom" bg="primary" variant="dark" expand="md">
@@ -58,9 +57,8 @@ const logoutLink = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      )
     </ProvideAuth>
-      //  eslint-disable-next-line 
+    //  eslint-disable-next-line
   );
   return auth.user ? authenticatedNavLinks : notAuthenticatedNavLinks;
 };

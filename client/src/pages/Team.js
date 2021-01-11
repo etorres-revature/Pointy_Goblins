@@ -197,28 +197,6 @@ const Team = () => {
             <ul className="social mb-0 list-inline mt-3">
               <li className="list-inline-item">
                 <a
-                  href="#"
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="social-link"
-                >
-                  <i className="fa fa-facebook-f"></i>
-                </a>
-              </li>
-              <li className="list-inline-item">
-                <a
-                  href="#"
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="social-link"
-                >
-                  <i className="fa fa-twitter"></i>
-                </a>
-              </li>
-              <li className="list-inline-item">
-                <a
                   href="https://github.com/abraspin"
                   // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
