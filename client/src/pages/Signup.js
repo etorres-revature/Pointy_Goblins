@@ -14,11 +14,9 @@ const Signup = () => {
 
   const [validated, setValidated] = useState(true);
 
-
   function handleUserSubmit(event) {
     event.preventDefault();
     const { firstName, lastName, email, password, reEnterPassword } = user;
-   
 
     if (password !== reEnterPassword) {
       setValidated(false);
@@ -112,15 +110,12 @@ const Signup = () => {
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-              className=  {validated ? "form-control" : "form-control is-invalid"}
+                className=  {validated ? "form-control" : "form-control is-invalid"}
                 onChange={updateUserCredentials}
                 value={user.password}
                 name="password"
                 type="password"
                 placeholder="Password"
-                // checkForValid={checkValid}
-
-                // className=  "form-control is-invalid"
               />
                 
                 <Form.Control.Feedback type="invalid">
@@ -140,15 +135,9 @@ const Signup = () => {
                 name="reEnterPassword"
                 type="password"
                 placeholder="Reenter Password"
-              
-                
-    
               />
-              
-              
-            </Form.Group>
 
-            
+            </Form.Group>
 
             <Button
               onClick={handleUserSubmit}
