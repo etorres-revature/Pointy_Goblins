@@ -19,6 +19,7 @@ import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
 import axios from "axios";
 import Logout from "./components/Logout/Logout";
+import Budget from "./pages/budget";
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useAuth();
@@ -66,7 +67,7 @@ function App() {
                 <Favorites />
               </PrivateRoute>
               <PrivateRoute exact path="/budget">
-                
+                <Budget />
               </PrivateRoute>
               <PrivateRoute exact path="/team">
                 <Team />
