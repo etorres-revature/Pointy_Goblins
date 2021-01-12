@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import API from "../utils/API";
 
@@ -8,39 +8,31 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    password: ""
   });
+
+  const history = useHistory();
 
   function handleUserSubmit(event) {
     event.preventDefault();
     const { firstName, lastName, email, password } = user;
 
-    if (
-      firstName.length &&
-      lastName.length &&
-      email.length &&
-      password.length
-    ) {
+    if (firstName.length && lastName.length && email.length && password.length) {
       API.createUser({
         firstName,
         lastName,
         email,
-        password,
+        password
+      }).then(() => setUser({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
+      })).then(res => {
+        history.replace("/signin");
+      }).catch(err => {
+        console.log(err);
       })
-        .then(() =>
-          setUser({
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-          })
-        )
-        .then((res) => {
-          window.location.replace("/signin");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     }
   }
 
@@ -62,37 +54,20 @@ const Signup = () => {
         <Card.Body>
           <Card.Title>SIGN-UP FORM</Card.Title>
           <Form className="mt-2">
+
             <Form.Group controlId="formBasicEmail">
               <Form.Label>First Name</Form.Label>
-              <Form.Control
-                onChange={updateUserCredentials}
-                value={user.firstName}
-                name="firstName"
-                type="text"
-                placeholder="Enter first name"
-              />
+              <Form.Control onChange={updateUserCredentials} value={user.firstName} name="firstName" type="text" placeholder="Enter first name" />
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                onChange={updateUserCredentials}
-                value={user.lastName}
-                name="lastName"
-                type="text"
-                placeholder="Enter last name"
-              />
+              <Form.Control onChange={updateUserCredentials} value={user.lastName} name="lastName" type="text" placeholder="Enter last name" />
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control
-                onChange={updateUserCredentials}
-                value={user.email}
-                name="email"
-                type="email"
-                placeholder="Enter email"
-              />
+              <Form.Control onChange={updateUserCredentials} value={user.email} name="email" type="email" placeholder="Enter email" />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
@@ -100,20 +75,9 @@ const Signup = () => {
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                onChange={updateUserCredentials}
-                value={user.password}
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
+              <Form.Control onChange={updateUserCredentials} value={user.password} name="password" type="password" placeholder="Password" />
             </Form.Group>
-            <Button
-              onClick={handleUserSubmit}
-              variant="primary"
-              type="submit"
-              block
-            >
+            <Button onClick={handleUserSubmit} variant="primary" type="submit" block>
               Submit
             </Button>
           </Form>
