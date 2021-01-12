@@ -73,28 +73,6 @@ const Team = () => {
             <ul className="social mb-0 list-inline mt-3">
               <li className="list-inline-item">
                 <a
-                  href="#"
-                  className="social-link"
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <i className="fa fa-facebook-f"></i>
-                </a>
-              </li>
-              <li className="list-inline-item">
-                <a
-                  href="#"
-                  className="social-link"
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <i className="fa fa-twitter"></i>
-                </a>
-              </li>
-              <li className="list-inline-item">
-                <a
                   href="https://github.com/trilambda122"
                   // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
@@ -134,28 +112,6 @@ const Team = () => {
               Backend - Ninja
             </span>
             <ul className="social mb-0 list-inline mt-3">
-              <li className="list-inline-item">
-                <a
-                  href="#"
-                  className="social-link"
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <i className="fa fa-facebook-f"></i>
-                </a>
-              </li>
-              <li className="list-inline-item">
-                <a
-                  href="#"
-                  className="social-link"
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <i className="fa fa-twitter"></i>
-                </a>
-              </li>
               <li className="list-inline-item">
                 <a
                   href="https://github.com/Cenzo-cmd"

@@ -30,8 +30,8 @@ function PrivateRoute({ children, ...rest }) {
         auth.user ? (
           children
         ) : (
-          <Redirect to={{ pathname: "/signin", state: { from: location } }} />
-        )
+            <Redirect to={{ pathname: "/signin", state: { from: location } }} />
+          )
       }
     />
   );
@@ -71,7 +71,16 @@ function App() {
               <PrivateRoute exact path="/logout">
                 <Logout />
               </PrivateRoute>
-              <Route render={() => <NoMatch />} />
+
+              <Route path="*" render={() => {
+                console.log("i'M IN THE NO MATCH ROUTE!!!!!!!!!!!!!!!!!!!!");
+                return <NoMatch />
+              }} />
+
+              {/* <Route path="*">
+                <NoMatch />
+              </Route> */}
+
             </Switch>
           </Container>
         </Router>
