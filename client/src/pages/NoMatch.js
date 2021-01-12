@@ -12,7 +12,7 @@ const NoMatch = () => {
       <br />
       <h2>404 - PAGE NOT FOUND</h2>
       <br />
-      <img src={lost} alt="stranded on a desert island" />
+      <img className="noMatchPic" src={lost} alt="stranded on a desert island" />
       <br />
       <br />
       <p>
