@@ -20,7 +20,7 @@ const Signin = () => {
       history.push("/landing");
     });
   };
-  //history.push("/landing");
+
   return (
     <Container className="mt-4">
       <div className="mb-4">

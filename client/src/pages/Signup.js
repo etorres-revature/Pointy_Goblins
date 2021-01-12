@@ -8,14 +8,22 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    password: "",
+    reEnterPassword: "",
   });
+
+  const [validated, setValidated] = useState(true);
 
   const history = useHistory();
 
   function handleUserSubmit(event) {
     event.preventDefault();
-    const { firstName, lastName, email, password } = user;
+    const { firstName, lastName, email, password, reEnterPassword } = user;
+
+    if (password !== reEnterPassword) {
+      setValidated(false);
+      return
+    }
 
     if (firstName.length && lastName.length && email.length && password.length) {
       API.createUser({
@@ -33,6 +41,21 @@ const Signup = () => {
       }).catch(err => {
         console.log(err);
       })
+        .then(() =>
+          setUser({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            reEnterPassword: "",
+          })
+        )
+        .then((res) => {
+          history.replace("/signin");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -75,9 +98,44 @@ const Signup = () => {
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control onChange={updateUserCredentials} value={user.password} name="password" type="password" placeholder="Password" />
+
+              <Form.Control
+                className=  {validated ? "form-control" : "form-control is-invalid"}
+                onChange={updateUserCredentials}
+                value={user.password}
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
+                
+                <Form.Control.Feedback type="invalid">
+                  Passwords do not match.
+                </Form.Control.Feedback>
+
             </Form.Group>
-            <Button onClick={handleUserSubmit} variant="primary" type="submit" block>
+
+            <Form.Group controlId="formBasicReEnterPassword">
+              <Form.Label>Reenter Password</Form.Label>
+              <Form.Control
+
+                className=  {validated ? "form-control" : "form-control is-invalid"}
+
+                onChange={updateUserCredentials}
+                value={user.reEnterPassword}
+                name="reEnterPassword"
+                type="password"
+                placeholder="Reenter Password"
+              />
+
+            </Form.Group>
+
+            <Button
+              onClick={handleUserSubmit}
+              variant="primary"
+              type="submit"
+              block
+            >
+
               Submit
             </Button>
           </Form>
