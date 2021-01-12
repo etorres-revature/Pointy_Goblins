@@ -65,6 +65,9 @@ function App() {
               <PrivateRoute exact path="/favorites">
                 <Favorites />
               </PrivateRoute>
+              <PrivateRoute exact path="/budget">
+                
+              </PrivateRoute>
               <PrivateRoute exact path="/team">
                 <Team />
               </PrivateRoute>
@@ -73,7 +76,6 @@ function App() {
               </PrivateRoute>
 
               <Route path="*" render={() => {
-                console.log("i'M IN THE NO MATCH ROUTE!!!!!!!!!!!!!!!!!!!!");
                 return <NoMatch />
               }} />
 
