@@ -6,9 +6,6 @@ import { ProvideAuth, useAuth } from "../../utils/authContext";
 const MyNavBar = () => {
   const auth = useAuth();
 
-  const logoutLink = () => {
-    <Link to="/"></Link>;
-  };
   const authenticatedNavLinks = (
     <ProvideAuth>
       <Navbar className="border-bottom" bg="primary" variant="dark" expand="md">
@@ -20,9 +17,6 @@ const MyNavBar = () => {
           <Nav className="ml-auto">
             <Link className="nav-link" to="/landing">
               Home
-            </Link>
-            <Link className="nav-link" to="/search">
-              Search
             </Link>
             <Link className="nav-link" to="/favorites">
               Favorites
