@@ -9,11 +9,21 @@ const Signup = () => {
     lastName: "",
     email: "",
     password: "",
+    reEnterPassword: "",
   });
+
+  const [validated, setValidated] = useState(true);
+
 
   function handleUserSubmit(event) {
     event.preventDefault();
-    const { firstName, lastName, email, password } = user;
+    const { firstName, lastName, email, password, reEnterPassword } = user;
+   
+
+    if (password !== reEnterPassword) {
+      setValidated(false);
+      return
+    }
 
     if (
       firstName.length &&
@@ -33,6 +43,7 @@ const Signup = () => {
             lastName: "",
             email: "",
             password: "",
+            reEnterPassword: "",
           })
         )
         .then((res) => {
@@ -101,13 +112,44 @@ const Signup = () => {
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
+              className=  {validated ? "form-control" : "form-control is-invalid"}
                 onChange={updateUserCredentials}
                 value={user.password}
                 name="password"
                 type="password"
                 placeholder="Password"
+                // checkForValid={checkValid}
+
+                // className=  "form-control is-invalid"
               />
+                
+                <Form.Control.Feedback type="invalid">
+                  Passwords do not match.
+                </Form.Control.Feedback>
+
             </Form.Group>
+
+            <Form.Group controlId="formBasicReEnterPassword">
+              <Form.Label>Reenter Password</Form.Label>
+              <Form.Control
+
+                className=  {validated ? "form-control" : "form-control is-invalid"}
+
+                onChange={updateUserCredentials}
+                value={user.reEnterPassword}
+                name="reEnterPassword"
+                type="password"
+                placeholder="Reenter Password"
+              
+                
+    
+              />
+              
+              
+            </Form.Group>
+
+            
+
             <Button
               onClick={handleUserSubmit}
               variant="primary"
