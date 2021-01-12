@@ -71,9 +71,16 @@ function App() {
               <PrivateRoute exact path="/logout">
                 <Logout />
               </PrivateRoute>
-              <Route path="*">
+
+              <Route path="*" render={() => {
+                console.log("i'M IN THE NO MATCH ROUTE!!!!!!!!!!!!!!!!!!!!");
+                return <NoMatch />
+              }} />
+
+              {/* <Route path="*">
                 <NoMatch />
-              </Route>
+              </Route> */}
+
             </Switch>
           </Container>
         </Router>
