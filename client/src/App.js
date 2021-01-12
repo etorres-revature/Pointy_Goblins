@@ -71,7 +71,7 @@ function App() {
               <PrivateRoute exact path="/logout">
                 <Logout />
               </PrivateRoute>
-              <Route render={() => <NoMatch />} />
+              <Route path="*" render={() => <NoMatch />} />
             </Switch>
           </Container>
         </Router>
