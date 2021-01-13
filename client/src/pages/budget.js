@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Table, InputGroup, FormControl, Button } from "react-bootstrap";
+import {
+  Container,
+  Table,
+  InputGroup,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 import API from "../utils/API";
 
 function Budget() {
@@ -35,71 +41,72 @@ function Budget() {
   console.log(allBudgetItems);
   return (
     <div>
-      <div>
-        <InputGroup className='mb-3'>
+      <Container className="mt-2">
+        <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <InputGroup.Text id='inputGroup-sizing-default'>
+            <InputGroup.Text id="inputGroup-sizing-default">
               Description
             </InputGroup.Text>
           </InputGroup.Prepend>
 
           <FormControl
             onChange={updateUserCredentials}
-            name='description'
-            aria-label='Default'
-            aria-describedby='inputGroup-sizing-default'
+            name="description"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
           />
         </InputGroup>
-        <InputGroup className='mb-3'>
+        <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <InputGroup.Text id='inputGroup-sizing-default'>
+            <InputGroup.Text id="inputGroup-sizing-default">
               Type
             </InputGroup.Text>
           </InputGroup.Prepend>
 
           <FormControl
             onChange={updateUserCredentials}
-            name='type'
-            aria-label='Default'
-            aria-describedby='inputGroup-sizing-default'
+            name="type"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
           />
         </InputGroup>
-        <InputGroup className='mb-3'>
+        <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <InputGroup.Text id='inputGroup-sizing-default'>
+            <InputGroup.Text id="inputGroup-sizing-default">
               Quantity
             </InputGroup.Text>
           </InputGroup.Prepend>
 
           <FormControl
             onChange={updateUserCredentials}
-            name='quantity'
-            aria-label='Default'
-            aria-describedby='inputGroup-sizing-default'
+            name="quantity"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
           />
         </InputGroup>
-        <InputGroup className='mb-3'>
+        <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <InputGroup.Text id='inputGroup-sizing-default'>
+            <InputGroup.Text id="inputGroup-sizing-default">
               Unit Cost $
             </InputGroup.Text>
           </InputGroup.Prepend>
 
           <FormControl
             onChange={updateUserCredentials}
-            name='unitCost'
-            aria-label='Default'
-            aria-describedby='inputGroup-sizing-default'
+            name="unitCost"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
           />
         </InputGroup>
-        <Button onClick={handleSubmit} variant='primary' type='submit' block>
+        <Button onClick={handleSubmit} variant="primary" type="submit" block>
           Submit
         </Button>
         <br />
-      </div>
+      </Container>
       <br />
+
       <div>
-        <Table striped bordered hover size='sm'>
+        <Table striped bordered hover size="sm">
           <thead>
             <tr>
               <th>Description</th>
