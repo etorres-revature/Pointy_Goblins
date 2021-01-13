@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, InputGroup, FormControl, Button } from "react-bootstrap";
+import API from "../utils/API";
 
 function Budget() {
   const [budgetItem, setBudgetItem] = useState({
@@ -8,6 +9,12 @@ function Budget() {
     quantity: "",
     unitCost: "",
   });
+
+  useEffect(() => {
+    API.getAllBudgetItems().then((result) => {
+      setAllBudgetItems(result.data);
+    });
+  }, []);
 
   const [allBudgetItems, setAllBudgetItems] = useState([]);
 
@@ -19,6 +26,9 @@ function Budget() {
   function handleSubmit(event) {
     event.preventDefault();
     setAllBudgetItems([...allBudgetItems, budgetItem]);
+    API.addBudgetItem(budgetItem).then((result) => {
+      console.log("success");
+    });
   }
 
   //   console.log(budgetItem);
@@ -100,15 +110,16 @@ function Budget() {
             </tr>
           </thead>
           <tbody>
-            {allBudgetItems.map((item) => (
-              <tr>
-                <td>{item.description}</td>
-                <td>{item.type}</td>
-                <td>{item.quantity}</td>
-                <td>{item.unitCost}</td>
-                <td>{item.quantity * item.unitCost}</td>
-              </tr>
-            ))}
+            {allBudgetItems &&
+              allBudgetItems.map((item) => (
+                <tr>
+                  <td>{item.description}</td>
+                  <td>{item.type}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.unitCost}</td>
+                  <td>{item.quantity * item.unitCost}</td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </div>

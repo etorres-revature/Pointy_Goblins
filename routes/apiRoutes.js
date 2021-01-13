@@ -22,102 +22,154 @@ module.exports = (app) => {
       });
   });
 
-
-  app.post("/api/signin", passport.authenticate("local"), (request, response) => {
-    response.json(request.user);
-  });
+  app.post(
+    "/api/signin",
+    passport.authenticate("local"),
+    (request, response) => {
+      response.json(request.user);
+    }
+  );
 
   app.post("/api/addToFavorites", (req, res) => {
-    db.FavoriteListing.create(req.body).then(result => {
-      res.json(result);
-    }).catch(err => {
-      console.log(err);
-    });
+    db.FavoriteListing.create(req.body)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  app.post("/api/addBudgetItem", (req, res) => {
+    db.User.findByIdAndUpdate(req.user._id, {
+      $push: { budgetItems: req.body },
+    })
+      .then((result) => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+    // console.log(req.user);
+    // console.log("this is the body", req.body);
+  });
+
+  app.get("/api/getBudgetItems", (req, res) => {
+    console.log("USER IS", req.user._id);
+    db.User.findById(req.user._id)
+      .then((result) => {
+        console.log("this is the reslult", result);
+        res.json(result.budgetItems);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
   });
 
   app.get("/api/favorites", (req, res) => {
-    db.FavoriteListing.find().then(result => {
-      res.json(result);
-    }).catch(err => {
-      console.log(err);
-    })
+    db.FavoriteListing.find()
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
-  
+
   app.delete("/api/delete/:id", (req, res) => {
-    db.FavoriteListing.findOneAndDelete({ "_id": req.params.id }).then(result => {
-      res.json(result);
-    }).catch(err => {
-      console.log(err);
-    })
-  })
+    db.FavoriteListing.findOneAndDelete({ _id: req.params.id })
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.json({message: "logged out"})
-  })
+    res.json({ message: "logged out" });
+  });
 
+  //GET ALL DATA
+  const getAllListings = async (location) => {
+    console.log("-------IN THE GET ALL LISTINGS FUCNTION -----");
+    console.log(location);
 
-  //GET ALL DATA 
-const getAllListings =  async (location)=>{
-  console.log('-------IN THE GET ALL LISTINGS FUCNTION -----')
-  console.log(location)
-  
-  switch (location){
-    case "BOSTON":
-      const bostonData = await  db.Boston.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
-        try{
-         return post
-        }catch {(error)=>{
-          console.log(error)
-        }}
-        
-       });
-       return bostonData.results
+    switch (location) {
+      case "BOSTON":
+        const bostonData = await db.Boston.findOne(
+          {},
+          {},
+          { sort: { createdAt: -1 } },
+          function (err, post) {
+            try {
+              return post;
+            } catch {
+              (error) => {
+                console.log(error);
+              };
+            }
+          }
+        );
+        return bostonData.results;
 
-    case "AUSTIN":
-      const austinData = await  db.Austin.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
-      try{
-        return post
-      }catch {(error)=>{
-        console.log(error)
-      }}
-      
-      });
-      return austinData.results
+      case "AUSTIN":
+        const austinData = await db.Austin.findOne(
+          {},
+          {},
+          { sort: { createdAt: -1 } },
+          function (err, post) {
+            try {
+              return post;
+            } catch {
+              (error) => {
+                console.log(error);
+              };
+            }
+          }
+        );
+        return austinData.results;
 
-    case "HOUSTON":
-      const houstonData = await  db.Houston.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
-      try{
-        return post
-      }catch {(error)=>{
-        console.log(error)
-      }}
-      
-      });
-      return houstonData.results
+      case "HOUSTON":
+        const houstonData = await db.Houston.findOne(
+          {},
+          {},
+          { sort: { createdAt: -1 } },
+          function (err, post) {
+            try {
+              return post;
+            } catch {
+              (error) => {
+                console.log(error);
+              };
+            }
+          }
+        );
+        return houstonData.results;
 
       case "DENVER":
-        const denverData = await  db.Denver.findOne( {}, {}, { sort: { 'createdAt' : -1 } },function(err, post) {
-        try{
-          console.log(post)
-          return post
-        }catch {(error)=>{
-          console.log(error)
-        }}
-        
-        });
-        return denverData.results
+        const denverData = await db.Denver.findOne(
+          {},
+          {},
+          { sort: { createdAt: -1 } },
+          function (err, post) {
+            try {
+              console.log(post);
+              return post;
+            } catch {
+              (error) => {
+                console.log(error);
+              };
+            }
+          }
+        );
+        return denverData.results;
 
-
-
-    default:
-      return 
-}
-
-  
-}
-
-
+      default:
+        return;
+    }
+  };
 
   app.get("/api/:city", (req, res) => {
     // if(req.params.city === 'logout') next()
