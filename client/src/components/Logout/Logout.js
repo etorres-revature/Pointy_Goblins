@@ -11,7 +11,7 @@ const Logout = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    auth.signout(() => history.replace("/signin"));
+    auth.signout(() => history.replace("/loggedoutpage"));
   }, []);
   if (error) return <div>Unable to logout</div>;
 
