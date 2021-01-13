@@ -7,8 +7,11 @@ const LoggedOutPage = () => {
 
 
     useEffect(() => {
-        setInterval(function () { history.replace("/signin") }, 3000);
+        setTimeout(function () { history.replace("/signin") }, 3000);
     }, []);
+
+
+
 
 
     return (
