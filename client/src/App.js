@@ -19,6 +19,7 @@ import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
 import axios from "axios";
 import Logout from "./components/Logout/Logout";
+import LoggedOutPage from "./pages/LoggedOutPage";
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useAuth();
@@ -53,6 +54,7 @@ function App() {
             <Switch>
               <Route exact path="/signin" render={() => <Signin />} />
               <Route exact path="/" render={() => <Signup />} />
+              <Route exact path="/loggedoutpage" render={() => <LoggedOutPage />} />
               <PrivateRoute exact path="/landing">
                 <Landing />
               </PrivateRoute>
