@@ -6,6 +6,9 @@ import {
   FormControl,
   Button,
   FormGroup,
+  Form,
+
+  Dropdown
 } from "react-bootstrap";
 import API from "../utils/API";
 
@@ -171,6 +174,11 @@ function Budget() {
       {/* <div className="col-md-6"> */}
       <div>
         <Container className="mt-2">
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d7ab1e2e4dd5b26ce6846da2ddf3360a29687d1a
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
               <InputGroup.Text id="inputGroup-sizing-default">
@@ -185,7 +193,7 @@ function Budget() {
               aria-describedby="inputGroup-sizing-default"
             />
           </InputGroup>
-          <InputGroup className="mb-3">
+          {/* <InputGroup className="mb-3">
             <InputGroup.Prepend>
               <InputGroup.Text id="inputGroup-sizing-default">
                 Type
@@ -198,7 +206,27 @@ function Budget() {
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
             />
-          </InputGroup>
+          </InputGroup> */}
+          <Form.Group>
+            <Form.Control
+              onChange={updateUserCredentials}
+              name='type'
+              as='select'
+            >
+              <option value='' selected>Choose Category...</option>
+              <option value='travelAdmin'>travelAdmin</option>
+              <option value='tickets'>Tickets</option>
+              <option value='auto'>Auto</option>
+              <option value='lodging'>Lodging</option>
+              <option value='food'>Food</option>
+              <option value='entertainment'>Entertainment</option>
+              <option value='shopping'>Shopping</option>
+              <option value='petChildCare'>Child/Pet Care</option>
+              <option value='other'>Other</option>
+            </Form.Control>
+          </Form.Group>
+
+
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
               <InputGroup.Text id="inputGroup-sizing-default">
