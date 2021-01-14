@@ -84,10 +84,6 @@ function Budget() {
       });
   }
 
-  function deleteItem() {
-    console.log("you clicked the button");
-  }
-
   let costTotals = {
     travelAdmin: 0,
     tickets: 0,
