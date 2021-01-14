@@ -84,6 +84,10 @@ function Budget() {
       });
   }
 
+  function deleteItem() {
+    console.log("you clicked the button");
+  }
+
   let costTotals = {
     travelAdmin: 0,
     tickets: 0,
@@ -117,7 +121,8 @@ function Budget() {
   const costTotalsArrayForChartData = Object.values(costTotals);
 
   const totalBudgetCost = costTotalsArrayForChartData.reduce(
-    (accumulator, currentValue) => accumulator + currentValue
+    (accumulator, currentValue) =>
+      parseInt(accumulator) + parseInt(currentValue)
   );
 
   const chartData = {
@@ -277,6 +282,7 @@ function Budget() {
                 <th>Quantity</th>
                 <th>Unit cost</th>
                 <th>Total Amount</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
