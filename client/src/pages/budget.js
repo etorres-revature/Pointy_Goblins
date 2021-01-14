@@ -174,11 +174,6 @@ function Budget() {
       {/* <div className="col-md-6"> */}
       <div>
         <Container className="mt-2">
-<<<<<<< HEAD
-=======
-
-
->>>>>>> d7ab1e2e4dd5b26ce6846da2ddf3360a29687d1a
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
               <InputGroup.Text id="inputGroup-sizing-default">
