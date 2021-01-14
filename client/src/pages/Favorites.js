@@ -1,4 +1,4 @@
-import { React, useState, useContext, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import API from "../utils/API";
 import { Card, Button, CardDeck } from "react-bootstrap";
 
@@ -28,7 +28,7 @@ const Search = () => {
     <CardDeck>
       {listings.map((listing) => (
         <Card>
-          <Card.Img variant="top" src={listing.image} />
+          <Card.Img variant='top' src={listing.image} />
           <Card.Body>
             <Card.Title>
               <strong> {listing.title}</strong>
@@ -38,14 +38,14 @@ const Search = () => {
             <h4>
               ${listing.price} /<small> night</small>
             </h4>
-            <Button variant="primary" target="_blank" href={listing.link}>
+            <Button variant='primary' target='_blank' href={listing.link}>
               See listing on {listing.source}
             </Button>
             <Button
               onClick={deleteListing}
               value={listing._id}
-              className="btn btn-danger"
-              variant="secondary m-2"
+              className='btn btn-danger'
+              variant='secondary m-2'
             >
               Remove from Favorites
             </Button>

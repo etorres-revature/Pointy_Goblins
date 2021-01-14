@@ -1,7 +1,5 @@
-
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../utils/authContext";
 
 const Logout = () => {

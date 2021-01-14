@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,7 +17,6 @@ import NoMatch from "./pages/NoMatch";
 import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
-import axios from "axios";
 import Logout from "./components/Logout/Logout";
 import Budget from "./pages/budget";
 
@@ -31,17 +30,14 @@ function PrivateRoute({ children, ...rest }) {
         auth.user ? (
           children
         ) : (
-            <Redirect to={{ pathname: "/signin", state: { from: location } }} />
-          )
+          <Redirect to={{ pathname: "/signin", state: { from: location } }} />
+        )
       }
     />
   );
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-
   const [city, setCity] = useState("");
   const [listings, setListings] = useState([]);
 
@@ -50,40 +46,42 @@ function App() {
       <ListingContext.Provider value={{ city, listings, setCity, setListings }}>
         <Router>
           <STRNavbar />
-          <Container className="p-0" fluid={"true"}>
+          <Container className='p-0' fluid={"true"}>
             <Switch>
-              <Route exact path="/signin" render={() => <Signin />} />
-              <Route exact path="/" render={() => <Signup />} />
-              <PrivateRoute exact path="/landing">
+              <Route exact path='/signin' render={() => <Signin />} />
+              <Route exact path='/' render={() => <Signup />} />
+              <PrivateRoute exact path='/landing'>
                 <Landing />
               </PrivateRoute>
-              <PrivateRoute exact path="/api/:city">
+              <PrivateRoute exact path='/api/:city'>
                 <h1>Hi there</h1>
               </PrivateRoute>
-              <PrivateRoute exact path="/search">
+              <PrivateRoute exact path='/search'>
                 <Search />
               </PrivateRoute>
-              <PrivateRoute exact path="/favorites">
+              <PrivateRoute exact path='/favorites'>
                 <Favorites />
               </PrivateRoute>
-              <PrivateRoute exact path="/budget">
+              <PrivateRoute exact path='/budget'>
                 <Budget />
               </PrivateRoute>
-              <PrivateRoute exact path="/team">
+              <PrivateRoute exact path='/team'>
                 <Team />
               </PrivateRoute>
-              <PrivateRoute exact path="/logout">
+              <PrivateRoute exact path='/logout'>
                 <Logout />
               </PrivateRoute>
 
-              <Route path="*" render={() => {
-                return <NoMatch />
-              }} />
+              <Route
+                path='*'
+                render={() => {
+                  return <NoMatch />;
+                }}
+              />
 
               {/* <Route path="*">
                 <NoMatch />
               </Route> */}
-
             </Switch>
           </Container>
         </Router>

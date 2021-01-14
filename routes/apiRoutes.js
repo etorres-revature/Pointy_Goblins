@@ -90,16 +90,8 @@ module.exports = (app) => {
 
   app.delete("/api/budgetItem/:id", (req, res) => {
     const removeId = req.params.id;
-    console.log("%%%%%%%%%%%", removeId);
-    //get user based on req.user.id
-    //filter budgetItems based on req.params.id
-    //update user.bugetItems to filtered ones
-    // save user
 
     db.User.findById(req.user._id).then((result) => {
-      console.log("$$$$$$$$$$$$$$", result);
-      console.log("&&&&&&&&&&&&&&&&", result.budgetItems);
-
       result.budgetItems.id(removeId).remove();
       result.save();
       res.json({ message: "Object was removed" });

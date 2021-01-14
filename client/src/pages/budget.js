@@ -5,30 +5,31 @@ import {
   InputGroup,
   FormControl,
   Button,
-  FormGroup,
   Form,
-  Dropdown,
 } from "react-bootstrap";
 import API from "../utils/API";
-
-import { Doughnut, Chart } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 function Budget() {
+  const [allBudgetItems, setAllBudgetItems] = useState([]);
+  const [disableButton, setDisableButton] = useState(true);
+
+  useEffect(() => {
+    getAllItems();
+  }, []);
+
+  function getAllItems() {
+    API.getAllBudgetItems().then((result) => {
+      setAllBudgetItems(result.data);
+    });
+  }
+
   const [budgetItem, setBudgetItem] = useState({
     description: "",
     type: "",
     quantity: "",
     unitCost: "",
   });
-
-  useEffect(() => {
-    API.getAllBudgetItems().then((result) => {
-      setAllBudgetItems(result.data);
-    });
-  }, []);
-
-  const [allBudgetItems, setAllBudgetItems] = useState([]);
-  const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
     if (
@@ -53,10 +54,11 @@ function Budget() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setAllBudgetItems([...allBudgetItems, budgetItem]);
+
     API.addBudgetItem(budgetItem)
       .then((result) => {
         console.log("success");
+        getAllItems();
       })
       .then(() => {
         setBudgetItem({
@@ -70,11 +72,16 @@ function Budget() {
 
   function deleteItem(event) {
     const id = event.target.value;
-    console.log("TTTTTTTTTTTTTTT", id);
-
-    API.deleteBudgetItem(id).then((result) => {
-      console.log(result);
-    });
+    API.deleteBudgetItem(id)
+      .then((result) => {
+        console.log("success");
+      })
+      .then(() => {
+        getAllItems();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   let costTotals = {
@@ -154,7 +161,6 @@ function Budget() {
     ],
   };
 
-  console.log(allBudgetItems);
   return (
     <div>
       {/* chart on the right half of page */}
@@ -278,6 +284,7 @@ function Budget() {
                 allBudgetItems.map((item) => (
                   <tr>
                     <td>{item.description}</td>
+                    {console.log("this is the items", item)}
                     <td>{item.type}</td>
                     <td>{item.quantity}</td>
                     <td>{item.unitCost}</td>
