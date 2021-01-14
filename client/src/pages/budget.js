@@ -5,10 +5,11 @@ import {
   InputGroup,
   FormControl,
   Button,
+  FormGroup,
 } from "react-bootstrap";
 import API from "../utils/API";
 
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut, Chart } from 'react-chartjs-2';
 
 function Budget() {
   const [budgetItem, setBudgetItem] = useState({
@@ -74,13 +75,14 @@ function Budget() {
 
   console.log("🚀 ~ file: budget.js ~ line 53 ~ Budget ~ costTotals", costTotals)
 
-  // let costTotalsArrayForChartData = []
-  // costTotals.forEach((costType) => {
-  //   costTotalsArrayForChartData.push(costType)
-  // })
+
 
   const costTotalsArrayForChartData = Object.values(costTotals)
   console.log("🚀 ~ file: budget.js ~ line 83 ~ Budget ~ costTotalsArrayForChartData", costTotalsArrayForChartData)
+
+
+  const totalBudgetCost = costTotalsArrayForChartData.reduce((accumulator, currentValue) => accumulator + currentValue)
+  console.log("🚀 ~ file: budget.js ~ line 85 ~ Budget ~ totalBudgetCost", totalBudgetCost)
 
   const chartData = {
     labels: [
@@ -122,14 +124,37 @@ function Budget() {
   };
 
 
-
   //   console.log(budgetItem);
   console.log(allBudgetItems);
   return (
     <div>
-      <div className="col-md-6">
+      {/* chart on the right half of page */}
+      {/* <div className="col-md-6"> */}
+      <div >
+
+        <div className="chart-container mx-auto " style={{ position: 'relative', height: '20rem', width: '20rem' }}>
+
+          <Doughnut options={{
+            maintainAspectRatio: false,
+            legend: {
+              position: 'right'
+            },
+
+          }
+          } data={chartData} />
+
+        </div>
+        <h3 className=" d-flex justify-content-center">Total Cost:  <strong>{totalBudgetCost}</strong></h3>
+        <hr></hr>
+        <h4 className="ml-5">Add additional costs below:</h4>
+        <br></br>
+      </div>
+
+      {/* <div className="col-md-6"> */}
+      <div >
 
         <Container className="mt-2">
+
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
               <InputGroup.Text id="inputGroup-sizing-default">
@@ -221,23 +246,8 @@ function Budget() {
       </div>
 
 
-      {/* chart on the right half of page */}
-      <div className="col-md-6">
-
-        <div className="chart-container " style={{ position: 'relative', height: '30rem', width: '30rem' }}>
-          {/* <Container > */}
-          <Doughnut options={{
-            maintainAspectRatio: false, legend: {
-              position: 'right'
-            }
-          }} data={chartData} />
-          {/* </Container> */}
-        </div>
-      </div>
 
     </div>
-
-
   );
 }
 
