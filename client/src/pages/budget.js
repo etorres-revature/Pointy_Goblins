@@ -84,7 +84,7 @@ function Budget() {
   console.log("🚀 ~ file: budget.js ~ line 83 ~ Budget ~ costTotalsArrayForChartData", costTotalsArrayForChartData)
 
 
-  const totalBudgetCost = costTotalsArrayForChartData.reduce((accumulator, currentValue) => accumulator + currentValue)
+  const totalBudgetCost = costTotalsArrayForChartData.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue))
   console.log("🚀 ~ file: budget.js ~ line 85 ~ Budget ~ totalBudgetCost", totalBudgetCost)
 
   const chartData = {
