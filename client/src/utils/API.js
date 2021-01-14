@@ -29,6 +29,9 @@ const API = {
   getAllBudgetItems: function () {
     return axios.get("api/getBudgetItems");
   },
+  deleteBudgetItem: function (id) {
+    return axios.delete("/api/budgetItem/" + id);
+  },
 };
 
 export default API;

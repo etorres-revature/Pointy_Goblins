@@ -4,6 +4,7 @@ const passport = require("../config/passport");
 const airbnb = require("../webscrapers/airbnb");
 const vrbo = require("../webscrapers/vrbo");
 const sonder = require("../webscrapers/sonder");
+const { filter } = require("compression");
 
 module.exports = (app) => {
   app.post("/api/createUser", (request, response) => {
@@ -50,15 +51,11 @@ module.exports = (app) => {
       .catch((err) => {
         res.json(err);
       });
-    // console.log(req.user);
-    // console.log("this is the body", req.body);
   });
 
   app.get("/api/getBudgetItems", (req, res) => {
-    console.log("USER IS", req.user._id);
     db.User.findById(req.user._id)
       .then((result) => {
-        console.log("this is the reslult", result);
         res.json(result.budgetItems);
       })
       .catch((err) => {
@@ -91,11 +88,26 @@ module.exports = (app) => {
     res.json({ message: "logged out" });
   });
 
+  app.delete("/api/budgetItem/:id", (req, res) => {
+    const removeId = req.params.id;
+    console.log("%%%%%%%%%%%", removeId);
+    //get user based on req.user.id
+    //filter budgetItems based on req.params.id
+    //update user.bugetItems to filtered ones
+    // save user
+
+    db.User.findById(req.user._id).then((result) => {
+      console.log("$$$$$$$$$$$$$$", result);
+      console.log("&&&&&&&&&&&&&&&&", result.budgetItems);
+
+      result.budgetItems.id(removeId).remove();
+      result.save();
+      res.json({ message: "Object was removed" });
+    });
+  });
+
   //GET ALL DATA
   const getAllListings = async (location) => {
-    console.log("-------IN THE GET ALL LISTINGS FUCNTION -----");
-    console.log(location);
-
     switch (location) {
       case "BOSTON":
         const bostonData = await db.Boston.findOne(
@@ -155,7 +167,6 @@ module.exports = (app) => {
           { sort: { createdAt: -1 } },
           function (err, post) {
             try {
-              console.log(post);
               return post;
             } catch {
               (error) => {
@@ -172,11 +183,7 @@ module.exports = (app) => {
   };
 
   app.get("/api/:city", (req, res) => {
-    // if(req.params.city === 'logout') next()
-    // console.log("$$$$$$$$$$$$$$$", req.params);
     getAllListings(req.params.city).then((data) => {
-      // console.log("-------Returned restuls-------");
-      // console.log(data);
       return res.json(data);
     });
   });
