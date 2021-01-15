@@ -5,7 +5,6 @@ const authContext = createContext();
 
 function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  // auth.checkUserState();
   return (
     <authContext.Provider value={auth}>
       {children}
@@ -24,7 +23,7 @@ function useProvideAuth() {
     const currentUser = localStorage.getItem("user")
 
     if (currentUser != null) {
-      console.log("🚀 ~ file: authContext.js ~ line 23 ~ useProvideAuth ~ currentUser", currentUser)
+
 
       setUser(JSON.parse(currentUser))
     }
@@ -43,7 +42,7 @@ function useProvideAuth() {
   const signout = cb => {
     return API.signOut().then((res) => {
       localStorage.removeItem("user")
-      console.log(res);
+
       setUser(null);
       cb()
     })

@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import API from "../../utils/API";
 
 export default function SearchResultCard({ listingDetails }) {
-  
+
   const [clicked, setClicked] = useState(false);
 
   function addToFavorites() {
@@ -16,12 +16,12 @@ export default function SearchResultCard({ listingDetails }) {
       image: listingDetails.image,
       price: listingDetails.price
     }).then(() => {
-      console.log("success");
+
       setClicked(true);
     }).catch(err => {
       console.log(err);
     })
-    
+
   }
 
   return (

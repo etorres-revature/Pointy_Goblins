@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,7 +17,6 @@ import NoMatch from "./pages/NoMatch";
 import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
-import axios from "axios";
 import Logout from "./components/Logout/Logout";
 import LoggedOutPage from "./pages/LoggedOutPage";
 
@@ -39,8 +38,6 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   const [city, setCity] = useState("");
   const [listings, setListings] = useState([]);
@@ -75,13 +72,9 @@ function App() {
               </PrivateRoute>
 
               <Route path="*" render={() => {
-                console.log("i'M IN THE NO MATCH ROUTE!!!!!!!!!!!!!!!!!!!!");
                 return <NoMatch />
               }} />
 
-              {/* <Route path="*">
-                <NoMatch />
-              </Route> */}
 
             </Switch>
           </Container>

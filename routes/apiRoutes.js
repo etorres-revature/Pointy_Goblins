@@ -42,7 +42,7 @@ module.exports = (app) => {
       console.log(err);
     })
   });
-  
+
   app.delete("/api/delete/:id", (req, res) => {
     db.FavoriteListing.findOneAndDelete({ "_id": req.params.id }).then(result => {
       res.json(result);
@@ -53,78 +53,78 @@ module.exports = (app) => {
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.json({message: "logged out"})
+    res.json({ message: "logged out" })
   })
 
 
-  //GET ALL DATA 
-const getAllListings =  async (location)=>{
-  console.log('-------IN THE GET ALL LISTINGS FUCNTION -----')
-  console.log(location)
-  
-  switch (location){
-    case "BOSTON":
-      const bostonData = await  db.Boston.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
-        try{
-         return post
-        }catch {(error)=>{
-          console.log(error)
-        }}
-        
-       });
-       return bostonData.results
+  //Get all data from DB (previously scraped by auto-script)
+  const getAllListings = async (location) => {
+    switch (location) {
+      case "BOSTON":
+        const bostonData = await db.Boston.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, post) {
+          try {
+            return post
+          } catch {
+            (error) => {
+              console.log(error)
+            }
+          }
 
-    case "AUSTIN":
-      const austinData = await  db.Austin.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
-      try{
-        return post
-      }catch {(error)=>{
-        console.log(error)
-      }}
-      
-      });
-      return austinData.results
+        });
+        return bostonData.results
 
-    case "HOUSTON":
-      const houstonData = await  db.Houston.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
-      try{
-        return post
-      }catch {(error)=>{
-        console.log(error)
-      }}
-      
-      });
-      return houstonData.results
+      case "AUSTIN":
+        const austinData = await db.Austin.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, post) {
+          try {
+            return post
+          } catch {
+            (error) => {
+              console.log(error)
+            }
+          }
+
+        });
+        return austinData.results
+
+      case "HOUSTON":
+        const houstonData = await db.Houston.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, post) {
+          try {
+            return post
+          } catch {
+            (error) => {
+              console.log(error)
+            }
+          }
+
+        });
+        return houstonData.results
 
       case "DENVER":
-        const denverData = await  db.Denver.findOne( {}, {}, { sort: { 'createdAt' : -1 } },function(err, post) {
-        try{
-          console.log(post)
-          return post
-        }catch {(error)=>{
-          console.log(error)
-        }}
-        
+        const denverData = await db.Denver.findOne({}, {}, { sort: { 'createdAt': -1 } }, function (err, post) {
+          try {
+            return post
+          } catch {
+            (error) => {
+              console.log(error)
+            }
+          }
+
         });
         return denverData.results
 
 
 
-    default:
-      return 
-}
+      default:
+        return
+    }
 
-  
-}
+
+  }
 
 
 
   app.get("/api/:city", (req, res) => {
-    // if(req.params.city === 'logout') next()
-    // console.log("$$$$$$$$$$$$$$$", req.params);
     getAllListings(req.params.city).then((data) => {
-      // console.log("-------Returned restuls-------");
-      // console.log(data);
       return res.json(data);
     });
   });

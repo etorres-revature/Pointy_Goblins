@@ -1,12 +1,11 @@
 import React from "react";
 import STRCard from "./STRCard";
 import "./CardList.css";
-import { Card, CardGroup } from "react-bootstrap";
+import { CardGroup } from "react-bootstrap";
 
 // for landing page search options
 const CardList = (props) => {
-  console.log("CARDLIST");
-  console.log(props);
+
 
   return (
     <CardGroup>

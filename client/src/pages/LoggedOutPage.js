@@ -1,4 +1,4 @@
-import { React, useContext, useEffect } from "react";
+import { React, useEffect } from "react";
 import { Jumbotron, Image } from "react-bootstrap"
 import loggedOutImg from "../../src/assets/img/loggedOutImg.jpg"
 import { useHistory } from 'react-router-dom'
