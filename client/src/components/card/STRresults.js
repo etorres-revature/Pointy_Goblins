@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, CardColumns, Row } from "react-bootstrap";
+import { CardColumns, Row } from "react-bootstrap";
 import SearchResultCard from "../card/SearchResultCard";
 
 export default function STRresults(props) {
@@ -13,12 +13,12 @@ export default function STRresults(props) {
           </h1>
         </Row>
       ) : (
-        <CardColumns className="m-3">
-          {props.list.data.map((item) => {
-            return <SearchResultCard listingDetails={item}></SearchResultCard>;
-          })}
-        </CardColumns>
-      )}
+          <CardColumns className="m-3">
+            {props.list.data.map((item) => {
+              return <SearchResultCard listingDetails={item}></SearchResultCard>;
+            })}
+          </CardColumns>
+        )}
     </div>
   );
 }

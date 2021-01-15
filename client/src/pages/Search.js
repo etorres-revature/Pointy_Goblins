@@ -5,7 +5,7 @@ import STRresults from "../components/card/STRresults";
 
 const Search = () => {
   const { city, listings, setListings } = useContext(ListingContext);
-  console.log("🚀 ~ file: Search.js ~ line 6 ~ Search ~ city", city);
+
 
   let searchedCity = city;
   const casedSearchedCity =
@@ -14,12 +14,8 @@ const Search = () => {
   useEffect(() => {
     setListings([]);
     API.getRentals(city).then((results) => {
-      console.log(results);
       setListings(results);
-      console.log(
-        "🚀 ~ file: Search.js ~ line 6 ~ Search ~ listings",
-        listings
-      );
+
     });
   }, []);
 

@@ -1,4 +1,4 @@
-import { React, useState, useContext, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import API from "../utils/API";
 import { Card, Button, CardColumns } from "react-bootstrap";
 
@@ -19,7 +19,7 @@ const Search = () => {
     const id = event.target.value;
 
     API.deleteFavListing(id).then((result) => {
-      console.log(result);
+
       getFavs();
     });
   }
