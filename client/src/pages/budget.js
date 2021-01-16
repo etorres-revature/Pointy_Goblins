@@ -181,7 +181,7 @@ function Budget() {
           />
         </div>
         <h3 className=' d-flex justify-content-center'>
-          Total Cost: <strong>{totalBudgetCost}</strong>
+          Total Cost: $<strong>{totalBudgetCost}</strong>
         </h3>
         <hr></hr>
         <h4 className='ml-5'>Add additional costs below:</h4>
@@ -214,7 +214,7 @@ function Budget() {
               name='type'
               as='select'
             >
-              <option value='' selected>
+              <option value='' defaultValue>
                 Choose Category...
               </option>
               <option value='travelAdmin'>travelAdmin</option>
@@ -272,7 +272,7 @@ function Budget() {
         </Container>
         <br />
 
-        <div>
+        <div className='m-2'>
           <Table striped bordered hover size='sm'>
             <thead>
               <tr>
@@ -287,7 +287,7 @@ function Budget() {
             <tbody>
               {allBudgetItems &&
                 allBudgetItems.map((item) => (
-                  <tr>
+                  <tr key={item._id}>
                     <td>{item.description}</td>
                     {console.log("this is the items", item)}
                     <td>{item.type}</td>
