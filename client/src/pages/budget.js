@@ -188,9 +188,31 @@ function Budget() {
         <br></br>
       </div>
 
-      {/* <div className="col-md-6"> */}
       <div>
         <Container className='mt-2'>
+
+        <Form.Group>
+        <Form.Control
+          value={budgetItem.type}
+          onChange={updateUserCredentials}
+          name='type'
+          as='select'
+        >
+          <option value='' defaultValue>
+            Choose Category...
+          </option>
+          <option value='travelAdmin'>Travel Admin</option>
+          <option value='tickets'>Tickets</option>
+          <option value='auto'>Auto</option>
+          <option value='lodging'>Lodging</option>
+          <option value='food'>Food</option>
+          <option value='entertainment'>Entertainment</option>
+          <option value='shopping'>Shopping</option>
+          <option value='petChildCare'>Child/Pet Care</option>
+          <option value='other'>Other</option>
+        </Form.Control>
+      </Form.Group>
+
           <InputGroup className='mb-3'>
             <InputGroup.Prepend>
               <InputGroup.Text id='inputGroup-sizing-default'>
@@ -207,27 +229,7 @@ function Budget() {
             />
           </InputGroup>
 
-          <Form.Group>
-            <Form.Control
-              value={budgetItem.type}
-              onChange={updateUserCredentials}
-              name='type'
-              as='select'
-            >
-              <option value='' defaultValue>
-                Choose Category...
-              </option>
-              <option value='travelAdmin'>travelAdmin</option>
-              <option value='tickets'>Tickets</option>
-              <option value='auto'>Auto</option>
-              <option value='lodging'>Lodging</option>
-              <option value='food'>Food</option>
-              <option value='entertainment'>Entertainment</option>
-              <option value='shopping'>Shopping</option>
-              <option value='petChildCare'>Child/Pet Care</option>
-              <option value='other'>Other</option>
-            </Form.Control>
-          </Form.Group>
+
 
           <InputGroup className='mb-3'>
             <InputGroup.Prepend>
