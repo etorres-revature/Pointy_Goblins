@@ -7,6 +7,14 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  budgetItems: [
+    {
+      description: { type: String, required: true },
+      type: { type: String, required: true },
+      quantity: { type: Number, required: true },
+      unitCost: { type: Number, required: true },
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

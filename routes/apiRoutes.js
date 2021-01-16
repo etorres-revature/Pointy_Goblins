@@ -4,6 +4,7 @@ const passport = require("../config/passport");
 const airbnb = require("../webscrapers/airbnb");
 const vrbo = require("../webscrapers/vrbo");
 const sonder = require("../webscrapers/sonder");
+const { filter } = require("compression");
 
 module.exports = (app) => {
   app.post("/api/createUser", (request, response) => {
@@ -40,6 +41,28 @@ module.exports = (app) => {
       });
   });
 
+  app.post("/api/addBudgetItem", (req, res) => {
+    db.User.findByIdAndUpdate(req.user._id, {
+      $push: { budgetItems: req.body },
+    })
+      .then((result) => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.get("/api/getBudgetItems", (req, res) => {
+    db.User.findById(req.user._id)
+      .then((result) => {
+        res.json(result.budgetItems);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
   app.get("/api/favorites", (req, res) => {
     db.FavoriteListing.find()
       .then((result) => {
@@ -65,7 +88,17 @@ module.exports = (app) => {
     res.json({ message: "logged out" });
   });
 
-  //Get all data from DB (previously scraped by auto-script)
+  app.delete("/api/budgetItem/:id", (req, res) => {
+    const removeId = req.params.id;
+
+    db.User.findById(req.user._id).then((result) => {
+      result.budgetItems.id(removeId).remove();
+      result.save();
+      res.json({ message: "Object was removed" });
+    });
+  });
+
+  //GET ALL DATA
   const getAllListings = async (location) => {
     switch (location) {
       case "BOSTON":

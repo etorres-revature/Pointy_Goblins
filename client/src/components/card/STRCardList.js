@@ -7,7 +7,7 @@ import { CardGroup } from "react-bootstrap";
 const CardList = (props) => {
   return (
     <CardGroup>
-      <div className="cardList mx-auto">
+      <div className='cardList mx-auto'>
         {props.cities.map((city) => {
           return <STRCard key={city.id} city={city} />;
         })}

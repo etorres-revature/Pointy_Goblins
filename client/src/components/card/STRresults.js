@@ -7,12 +7,12 @@ export default function STRresults(props) {
     <div>
       {props.list.data === undefined ? (
         <Row>
-          <h1 className="mx-auto">
-            Loading Results... <i class="fas fa-spinner fa-spin"></i>
+          <h1 className='mx-auto'>
+            Loading Results... <i class='fas fa-spinner fa-spin'></i>
           </h1>
         </Row>
       ) : (
-        <CardColumns className="m-3">
+        <CardColumns className='m-3'>
           {props.list.data.map((item) => {
             return <SearchResultCard listingDetails={item}></SearchResultCard>;
           })}

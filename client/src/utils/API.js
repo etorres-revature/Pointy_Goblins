@@ -23,6 +23,15 @@ const API = {
   signOut: function () {
     return axios.get("api/logout");
   },
+  addBudgetItem: function (budget) {
+    return axios.post("api/addBudgetItem", budget);
+  },
+  getAllBudgetItems: function () {
+    return axios.get("api/getBudgetItems");
+  },
+  deleteBudgetItem: function (id) {
+    return axios.delete("/api/budgetItem/" + id);
+  },
 };
 
 export default API;

@@ -21,6 +21,9 @@ const MyNavBar = () => {
             <Link className="nav-link" to="/favorites">
               Favorites
             </Link>
+            <Link className="nav-link" to="/budget">
+              Budget Tracker
+            </Link>
             <Link className="nav-link" to="/team">
               Team
             </Link>
