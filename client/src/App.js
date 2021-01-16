@@ -18,6 +18,7 @@ import "./App.css";
 import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
 import Logout from "./components/Logout/Logout";
+import Budget from "./pages/budget";
 import LoggedOutPage from "./pages/LoggedOutPage";
 
 function PrivateRoute({ children, ...rest }) {
@@ -30,15 +31,14 @@ function PrivateRoute({ children, ...rest }) {
         auth.user ? (
           children
         ) : (
-            <Redirect to={{ pathname: "/signin", state: { from: location } }} />
-          )
+          <Redirect to={{ pathname: "/signin", state: { from: location } }} />
+        )
       }
     />
   );
 }
 
 function App() {
-
   const [city, setCity] = useState("");
   const [listings, setListings] = useState([]);
 
@@ -47,7 +47,7 @@ function App() {
       <ListingContext.Provider value={{ city, listings, setCity, setListings }}>
         <Router>
           <STRNavbar />
-          <Container className="p-0" fluid={"true"}>
+          <Container className='p-0' fluid={"true"}>
             <Switch>
               <Route exact path="/signin" render={() => <Signin />} />
               <Route exact path="/" render={() => <Signup />} />
@@ -55,26 +55,28 @@ function App() {
               <PrivateRoute exact path="/landing">
                 <Landing />
               </PrivateRoute>
-              <PrivateRoute exact path="/api/:city">
+              <PrivateRoute exact path='/api/:city'>
                 <h1>Hi there</h1>
               </PrivateRoute>
-              <PrivateRoute exact path="/search">
+              <PrivateRoute exact path='/search'>
                 <Search />
               </PrivateRoute>
-              <PrivateRoute exact path="/favorites">
+              <PrivateRoute exact path='/favorites'>
                 <Favorites />
               </PrivateRoute>
-              <PrivateRoute exact path="/team">
+              <PrivateRoute exact path='/budget'>
+                <Budget />
+              </PrivateRoute>
+              <PrivateRoute exact path='/team'>
                 <Team />
               </PrivateRoute>
-              <PrivateRoute exact path="/logout">
+              <PrivateRoute exact path='/logout'>
                 <Logout />
               </PrivateRoute>
 
               <Route path="*" render={() => {
                 return <NoMatch />
               }} />
-
 
             </Switch>
           </Container>

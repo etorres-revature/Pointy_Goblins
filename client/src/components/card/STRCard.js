@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "./Card.css";
-
 import ListingContext from "../../utils/ListingContext";
-
 
 // for landing page search options
 
@@ -19,7 +17,6 @@ const STRCard = (props) => {
   };
 
   return (
-
     <Card border="primary" style={{ width: "18rem" }} className="mt-3 cityCard">
       <Card.Body className="text-center">
         <Button name={props.city.city} onClick={updateCity} variant="success">
@@ -27,8 +24,8 @@ const STRCard = (props) => {
         </Button>
       </Card.Body>
       <Card.Img
-        className="image"
-        variant="bottom"
+        className='image'
+        variant='bottom'
         alt={props.city.city + " skyline"}
         src={props.city.img}
       />
