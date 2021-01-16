@@ -33,12 +33,14 @@ function Budget() {
 
   useEffect(() => {
     if (
-      budgetItem.description &&
-      budgetItem.type &&
-      budgetItem.quantity &&
-      budgetItem.unitCost
+      budgetItem.description !== "" &&
+      budgetItem.type !== "" &&
+      budgetItem.quantity !== "" &&
+      budgetItem.unitCost !== ""
     ) {
       setDisableButton(false);
+    } else {
+      setDisableButton(true);
     }
   }, [
     budgetItem.description,
@@ -55,19 +57,16 @@ function Budget() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    API.addBudgetItem(budgetItem)
-      .then((result) => {
-        console.log("success");
-        getAllItems();
-      })
-      .then(() => {
-        setBudgetItem({
-          description: "",
-          type: "",
-          quantity: "",
-          unitCost: "",
-        });
+    API.addBudgetItem(budgetItem).then((result) => {
+      console.log("success");
+      getAllItems();
+      setBudgetItem({
+        description: "",
+        type: "",
+        quantity: "",
+        unitCost: "",
       });
+    });
   }
 
   function deleteItem(event) {
@@ -200,6 +199,7 @@ function Budget() {
             </InputGroup.Prepend>
 
             <FormControl
+              value={budgetItem.description}
               onChange={updateUserCredentials}
               name='description'
               aria-label='Default'
@@ -209,6 +209,7 @@ function Budget() {
 
           <Form.Group>
             <Form.Control
+              value={budgetItem.type}
               onChange={updateUserCredentials}
               name='type'
               as='select'
@@ -236,6 +237,7 @@ function Budget() {
             </InputGroup.Prepend>
 
             <FormControl
+              value={budgetItem.quantity}
               onChange={updateUserCredentials}
               name='quantity'
               aria-label='Default'
@@ -250,6 +252,7 @@ function Budget() {
             </InputGroup.Prepend>
 
             <FormControl
+              value={budgetItem.unitCost}
               onChange={updateUserCredentials}
               name='unitCost'
               aria-label='Default'
