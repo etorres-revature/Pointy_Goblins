@@ -5,7 +5,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 const PORT = process.env.PORT || 8081;
 
@@ -20,7 +20,7 @@ app.use(logger("dev"));
 app.use(compression());
 //session info
 app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+  session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true })
 );
 app.use(passport.initialize());
 app.use(passport.session());
