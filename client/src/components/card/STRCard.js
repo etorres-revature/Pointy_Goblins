@@ -17,10 +17,9 @@ const STRCard = (props) => {
   };
 
   return (
-    // <ListingContext.Consumer>
-    <Card border='primary' style={{ width: "18rem" }} className='mt-3 cityCard'>
-      <Card.Body className='text-center'>
-        <Button name={props.city.city} onClick={updateCity} variant='success'>
+    <Card border="primary" style={{ width: "18rem" }} className="mt-3 cityCard">
+      <Card.Body className="text-center">
+        <Button name={props.city.city} onClick={updateCity} variant="success">
           {props.city.city}
         </Button>
       </Card.Body>
@@ -31,7 +30,7 @@ const STRCard = (props) => {
         src={props.city.img}
       />
     </Card>
-    // </ListingContext.Consumer>
+
   );
 };
 

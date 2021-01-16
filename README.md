@@ -4,7 +4,7 @@
 
 ## Project Description
 
-MERN full-stack web application that utilizes web scrappers; MongoDB for the backend; Express.js for server routing; Node.js for runtime environment; and React.js for client-side routing and views.
+The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) is a MERN full-stack web application that utilizes web scrappers to collect information; [**MongoDB**](https://www.mongodb.com/) for the backend; [**Express.js**](https://expressjs.com/) for server routing; [**React.js**](https://reactjs.org/) for client-side routing and views;and, [**Node.js**](https://nodejs.org/en/) for its runtime environment.
 
 ## Table of Contents
 
@@ -27,6 +27,40 @@ Users may clone the [STR Aggregator Repo](https://github.com/etorres-revature/Po
 ## Usage
 
 The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) is deployed on Heroku.
+
+The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) is comprised of 5 heroku apps. Behind the scenes there are four web scrapers being utilized to scrape STR listings from AirBnB, VRBO, and Sonder.com. The [Web Scraper Repo](https://github.com/trilambda122/STR-webworkers) is being used for those apps and they are set to fire off every ten minutes. The listings collected by the web scrapers are saved into the MongoDB database collection specific for that city, and displayed in the STR Aggregator when the user chooses that particular city. Below is a diagram of the process.
+
+![STR AGGREGATOR architecture](./screenshots/str-architecture.png) 
+
+PROGRESSIVE WEB APPLICATION (PWA):  The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) leverages the built in React.js capabilities to provide a Manifest and Service Worker enabling use as a PWA.
+
+![STR AGGREGATOR progressive web app](./screenshots/str-pwa.png)
+
+Users begin by being presented with the Sign-up page where they will be prompted to enter their First Name, Last Name, E-mail Address, and Password. Passwords are entered twice and have validation to ensure they are the same.
+
+![STR AGGREGATOR signup](./screenshots/str-signup-validation.png)
+
+Returning users can go directly to the Sign-in page where they will be prompted to enter their E-mail Address and Password.
+
+![STR AGGREGATOR signin](./screenshots/str-signin.png)
+
+Once authenticated a user will be brought to the Landing Page. Here the User is presented with the options for one of four cities to search for Short-term Rental listings.
+
+![STR AGGREGATOR landing](./screenshots/str-landing.png)
+
+When the User chooses a city to search, the [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) goes to the MongoDB Collection of that city and gets that most recent web scrapings to show to the User.
+
+Each listing contains: a photo of the STR, the STR title, STR details, the price of the STR, a link to the STR listing on the site from which it was scraped, and a button that will add that listing to a list of user favorites.
+
+![STR AGGREGATOR search](./screenshots/str-search.png)
+
+After the User is finished planning their trip they can log out. 
+
+![STR AGGREGATOR logout](./screenshots/str-logout.png)
+
+This is the team that brought you the [STR Aggregator](https://quiet-tor-69912.herokuapp.com/).
+
+![STR AGGREGATOR team page](./screenshots/str-team.png)
 
 ## Guidelines for Contributing
 

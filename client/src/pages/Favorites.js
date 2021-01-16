@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import API from "../utils/API";
-import { Card, Button, CardDeck } from "react-bootstrap";
+import { Card, Button, CardColumns } from "react-bootstrap";
 
 const Search = () => {
   const [listings, setListings] = useState([]);
@@ -19,40 +19,48 @@ const Search = () => {
     const id = event.target.value;
 
     API.deleteFavListing(id).then((result) => {
-      console.log(result);
+
       getFavs();
     });
   }
 
   return (
-    <CardDeck>
-      {listings.map((listing) => (
-        <Card>
-          <Card.Img variant='top' src={listing.image} />
-          <Card.Body>
-            <Card.Title>
-              <strong> {listing.title}</strong>
-            </Card.Title>
-            <hr></hr>
-            <Card.Text>{listing.description}</Card.Text>
-            <h4>
-              ${listing.price} /<small> night</small>
-            </h4>
-            <Button variant='primary' target='_blank' href={listing.link}>
-              See listing on {listing.source}
+    <div className="container">
+      <br></br>
+      <h2 className="mx-auto font-italic font-weight-bold"> Favorites</h2>
+      <hr></hr>
+
+      <CardColumns>
+        {listings.map((listing) => (
+          <Card>
+            <Card.Img variant="top" src={listing.image} />
+            <Card.Body>
+              <Card.Title>
+                <strong> {listing.title}</strong>
+              </Card.Title>
+              <hr></hr>
+              <Card.Text>{listing.description}</Card.Text>
+
+              <h4 className="d-flex justify-content-end">
+                ${listing.price} /<small> night</small>
+              </h4>
+              <hr></hr>
+              <Button className="mx-auto  d-flex justify-content-center" variant="primary btn  " target="_blank" href={listing.link}>
+                See listing on {listing.source}
+              </Button>
+              <Button
+                onClick={deleteListing}
+                value={listing._id}
+                className="btn btn-danger d-flex justify-content-center  mx-auto mt-2"
+                variant="secondary"
+              >
+                Remove from Favorites
             </Button>
-            <Button
-              onClick={deleteListing}
-              value={listing._id}
-              className='btn btn-danger'
-              variant='secondary m-2'
-            >
-              Remove from Favorites
-            </Button>
-          </Card.Body>
-        </Card>
-      ))}
-    </CardDeck>
+            </Card.Body>
+          </Card>
+        ))}
+      </CardColumns>
+    </div>
   );
 };
 

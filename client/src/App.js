@@ -19,6 +19,7 @@ import { ProvideAuth, useAuth } from "./utils/authContext";
 import ListingContext from "./utils/ListingContext";
 import Logout from "./components/Logout/Logout";
 import Budget from "./pages/budget";
+import LoggedOutPage from "./pages/LoggedOutPage";
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useAuth();
@@ -48,9 +49,10 @@ function App() {
           <STRNavbar />
           <Container className='p-0' fluid={"true"}>
             <Switch>
-              <Route exact path='/signin' render={() => <Signin />} />
-              <Route exact path='/' render={() => <Signup />} />
-              <PrivateRoute exact path='/landing'>
+              <Route exact path="/signin" render={() => <Signin />} />
+              <Route exact path="/" render={() => <Signup />} />
+              <Route exact path="/loggedoutpage" render={() => <LoggedOutPage />} />
+              <PrivateRoute exact path="/landing">
                 <Landing />
               </PrivateRoute>
               <PrivateRoute exact path='/api/:city'>
@@ -72,16 +74,10 @@ function App() {
                 <Logout />
               </PrivateRoute>
 
-              <Route
-                path='*'
-                render={() => {
-                  return <NoMatch />;
-                }}
-              />
+              <Route path="*" render={() => {
+                return <NoMatch />
+              }} />
 
-              {/* <Route path="*">
-                <NoMatch />
-              </Route> */}
             </Switch>
           </Container>
         </Router>

@@ -4,12 +4,12 @@ import { useAuth } from "../../utils/authContext";
 
 const Logout = () => {
   const history = useHistory();
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   const auth = useAuth();
 
   useEffect(() => {
-    auth.signout(() => history.replace("/signin"));
+    auth.signout(() => history.replace("/loggedoutpage"));
   }, []);
   if (error) return <div>Unable to logout</div>;
 

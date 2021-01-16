@@ -8,9 +8,7 @@ module.exports = (app) => {
         response.sendFile(path.join(__dirname, "../client/public/index.html"))
     });
 
-    // app.get("/landing", isAuthenticated, (request, response) => {
 
-    // })
 
 }
 
