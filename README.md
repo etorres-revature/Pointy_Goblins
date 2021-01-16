@@ -30,9 +30,9 @@ The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) is deployed on Hero
 
 The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) is comprised of 5 heroku apps. Behind the scenes there are four web scrapers being utilized to scrape STR listings from AirBnB, VRBO, and Sonder.com. The [Web Scraper Repo](https://github.com/trilambda122/STR-webworkers) is being used for those apps and they are set to fire off every ten minutes. The listings collected by the web scrapers are saved into the MongoDB database collection specific for that city, and displayed in the STR Aggregator when the user chooses that particular city. Below is a diagram of the process.
 
-![STR AGGREGATOR architecture](./screenshots/str-architecture.png) 
+![STR AGGREGATOR architecture](./screenshots/str-architecture.png)
 
-PROGRESSIVE WEB APPLICATION (PWA):  The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) leverages the built in React.js capabilities to provide a Manifest and Service Worker enabling use as a PWA.
+PROGRESSIVE WEB APPLICATION (PWA): The [STR Aggregator](https://quiet-tor-69912.herokuapp.com/) leverages the built in React.js capabilities to provide a Manifest and Service Worker enabling use as a PWA.
 
 ![STR AGGREGATOR progressive web app](./screenshots/str-pwa.png)
 
@@ -54,7 +54,15 @@ Each listing contains: a photo of the STR, the STR title, STR details, the price
 
 ![STR AGGREGATOR search](./screenshots/str-search.png)
 
-After the User is finished planning their trip they can log out. 
+See a listing you want to be able to revisit - then you can add it to the User's favorites...
+
+![STR AGGREGATOR favorites](./screenshots/str-favorites.png)
+
+When cost is a concern (and, it always is!!), the User can create a budget for the travel with the [STR AGGREGATOR's](https://quiet-tor-69912.herokuapp.com/) built in budgeting page. The page allows the User to enter in different categories of the travel budget, the description, quantity, and amount. The handy-dandy pie chart gives a visualization of the budget costs. And when the first trip is over, the User can delete all previous entries and plan for the second trip.
+
+![STR AGGREGATOR budget](./screenshots/str-budget.png)
+
+After the User is finished planning their trip they can log out.
 
 ![STR AGGREGATOR logout](./screenshots/str-logout.png)
 

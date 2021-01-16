@@ -5,7 +5,6 @@ import "./Card.css";
 import ListingContext from "../../utils/ListingContext";
 
 // for landing page search options
-
 const STRCard = (props) => {
   const history = useHistory();
 
@@ -30,7 +29,6 @@ const STRCard = (props) => {
         src={props.city.img}
       />
     </Card>
-
   );
 };
 

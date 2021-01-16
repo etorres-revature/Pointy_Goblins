@@ -6,7 +6,6 @@ import STRresults from "../components/card/STRresults";
 const Search = () => {
   const { city, listings, setListings } = useContext(ListingContext);
 
-
   let searchedCity = city;
   const casedSearchedCity =
     searchedCity.charAt(0).toUpperCase() + searchedCity.slice(1).toLowerCase();
@@ -15,7 +14,6 @@ const Search = () => {
     setListings([]);
     API.getRentals(city).then((results) => {
       setListings(results);
-
     });
   }, []);
 

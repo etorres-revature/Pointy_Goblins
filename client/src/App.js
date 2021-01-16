@@ -51,7 +51,11 @@ function App() {
             <Switch>
               <Route exact path="/signin" render={() => <Signin />} />
               <Route exact path="/" render={() => <Signup />} />
-              <Route exact path="/loggedoutpage" render={() => <LoggedOutPage />} />
+              <Route
+                exact
+                path="/loggedoutpage"
+                render={() => <LoggedOutPage />}
+              />
               <PrivateRoute exact path="/landing">
                 <Landing />
               </PrivateRoute>
@@ -73,11 +77,12 @@ function App() {
               <PrivateRoute exact path='/logout'>
                 <Logout />
               </PrivateRoute>
-
-              <Route path="*" render={() => {
-                return <NoMatch />
-              }} />
-
+              <Route
+                path="*"
+                render={() => {
+                  return <NoMatch />;
+                }}
+              />
             </Switch>
           </Container>
         </Router>
