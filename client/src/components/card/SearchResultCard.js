@@ -3,7 +3,6 @@ import { Card, Button } from "react-bootstrap";
 import API from "../../utils/API";
 
 export default function SearchResultCard({ listingDetails }) {
-
   const [clicked, setClicked] = useState(false);
 
   function addToFavorites() {
@@ -14,14 +13,14 @@ export default function SearchResultCard({ listingDetails }) {
       source: listingDetails.source,
       link: listingDetails.link,
       image: listingDetails.image,
-      price: listingDetails.price
-    }).then(() => {
-
-      setClicked(true);
-    }).catch(err => {
-      console.log(err);
+      price: listingDetails.price,
     })
-
+      .then(() => {
+        setClicked(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -39,7 +38,13 @@ export default function SearchResultCard({ listingDetails }) {
         <Button variant="primary" target="_blank" href={listingDetails.link}>
           See listing on {listingDetails.source}
         </Button>
-        <Button onClick={addToFavorites} disabled={clicked} variant="secondary m-2">Add to Favorites</Button>
+        <Button
+          onClick={addToFavorites}
+          disabled={clicked}
+          variant="secondary m-2"
+        >
+          Add to Favorites
+        </Button>
       </Card.Body>
     </Card>
   );

@@ -22,25 +22,35 @@ const Signup = () => {
 
     if (password !== reEnterPassword) {
       setValidated(false);
-      return
+      return;
     }
 
-    if (firstName.length && lastName.length && email.length && password.length) {
+    if (
+      firstName.length &&
+      lastName.length &&
+      email.length &&
+      password.length
+    ) {
       API.createUser({
         firstName,
         lastName,
         email,
-        password
-      }).then(() => setUser({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
-      })).then(res => {
-        history.replace("/signin");
-      }).catch(err => {
-        console.log(err);
+        password,
       })
+        .then(() =>
+          setUser({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+          })
+        )
+        .then((res) => {
+          history.replace("/signin");
+        })
+        .catch((err) => {
+          console.log(err);
+        })
         .then(() =>
           setUser({
             firstName: "",
@@ -77,20 +87,37 @@ const Signup = () => {
         <Card.Body>
           <Card.Title>SIGN-UP FORM</Card.Title>
           <Form className="mt-2">
-
             <Form.Group controlId="formBasicEmail">
               <Form.Label>First Name</Form.Label>
-              <Form.Control onChange={updateUserCredentials} value={user.firstName} name="firstName" type="text" placeholder="Enter first name" />
+              <Form.Control
+                onChange={updateUserCredentials}
+                value={user.firstName}
+                name="firstName"
+                type="text"
+                placeholder="Enter first name"
+              />
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Last Name</Form.Label>
-              <Form.Control onChange={updateUserCredentials} value={user.lastName} name="lastName" type="text" placeholder="Enter last name" />
+              <Form.Control
+                onChange={updateUserCredentials}
+                value={user.lastName}
+                name="lastName"
+                type="text"
+                placeholder="Enter last name"
+              />
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control onChange={updateUserCredentials} value={user.email} name="email" type="email" placeholder="Enter email" />
+              <Form.Control
+                onChange={updateUserCredentials}
+                value={user.email}
+                name="email"
+                type="email"
+                placeholder="Enter email"
+              />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
@@ -100,33 +127,33 @@ const Signup = () => {
               <Form.Label>Password</Form.Label>
 
               <Form.Control
-                className=  {validated ? "form-control" : "form-control is-invalid"}
+                className={
+                  validated ? "form-control" : "form-control is-invalid"
+                }
                 onChange={updateUserCredentials}
                 value={user.password}
                 name="password"
                 type="password"
                 placeholder="Password"
               />
-                
-                <Form.Control.Feedback type="invalid">
-                  Passwords do not match.
-                </Form.Control.Feedback>
 
+              <Form.Control.Feedback type="invalid">
+                Passwords do not match.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formBasicReEnterPassword">
               <Form.Label>Reenter Password</Form.Label>
               <Form.Control
-
-                className=  {validated ? "form-control" : "form-control is-invalid"}
-
+                className={
+                  validated ? "form-control" : "form-control is-invalid"
+                }
                 onChange={updateUserCredentials}
                 value={user.reEnterPassword}
                 name="reEnterPassword"
                 type="password"
                 placeholder="Reenter Password"
               />
-
             </Form.Group>
 
             <Button
@@ -135,7 +162,6 @@ const Signup = () => {
               type="submit"
               block
             >
-
               Submit
             </Button>
           </Form>

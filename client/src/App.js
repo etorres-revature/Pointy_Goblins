@@ -30,15 +30,14 @@ function PrivateRoute({ children, ...rest }) {
         auth.user ? (
           children
         ) : (
-            <Redirect to={{ pathname: "/signin", state: { from: location } }} />
-          )
+          <Redirect to={{ pathname: "/signin", state: { from: location } }} />
+        )
       }
     />
   );
 }
 
 function App() {
-
   const [city, setCity] = useState("");
   const [listings, setListings] = useState([]);
 
@@ -51,7 +50,11 @@ function App() {
             <Switch>
               <Route exact path="/signin" render={() => <Signin />} />
               <Route exact path="/" render={() => <Signup />} />
-              <Route exact path="/loggedoutpage" render={() => <LoggedOutPage />} />
+              <Route
+                exact
+                path="/loggedoutpage"
+                render={() => <LoggedOutPage />}
+              />
               <PrivateRoute exact path="/landing">
                 <Landing />
               </PrivateRoute>
@@ -71,11 +74,12 @@ function App() {
                 <Logout />
               </PrivateRoute>
 
-              <Route path="*" render={() => {
-                return <NoMatch />
-              }} />
-
-
+              <Route
+                path="*"
+                render={() => {
+                  return <NoMatch />;
+                }}
+              />
             </Switch>
           </Container>
         </Router>

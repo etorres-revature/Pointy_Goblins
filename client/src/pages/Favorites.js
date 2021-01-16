@@ -19,7 +19,6 @@ const Search = () => {
     const id = event.target.value;
 
     API.deleteFavListing(id).then((result) => {
-
       getFavs();
     });
   }
@@ -45,7 +44,12 @@ const Search = () => {
                 ${listing.price} /<small> night</small>
               </h4>
               <hr></hr>
-              <Button className="mx-auto  d-flex justify-content-center" variant="primary btn  " target="_blank" href={listing.link}>
+              <Button
+                className="mx-auto  d-flex justify-content-center"
+                variant="primary btn  "
+                target="_blank"
+                href={listing.link}
+              >
                 See listing on {listing.source}
               </Button>
               <Button
@@ -55,7 +59,7 @@ const Search = () => {
                 variant="secondary"
               >
                 Remove from Favorites
-            </Button>
+              </Button>
             </Card.Body>
           </Card>
         ))}

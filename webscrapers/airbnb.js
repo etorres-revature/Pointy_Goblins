@@ -1,11 +1,10 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-// main url for fetch all the html from 
+// main url for fetch all the html from
 // const url = 'https://www.airbnb.com/s/austin/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&source=structured_search_input_header&search_type=search_query'
 
-
-// main function that is exported for use 
+// main function that is exported for use
 // function returns a promise and ultimately returns a JSON object of data
 // SAMPLE OF RETURNED JSON OBJECTS
 // {
@@ -18,74 +17,78 @@ const cheerio = require('cheerio');
 //   image: 'https://a0.muscache.com/im/pictures/4596765/80c96bbd_original.jpg?im_w=720'
 // }
 
-function getData(city){
-  console.log('------CITY---------')
-  console.log(city)
+function getData(city) {
+  console.log("------CITY---------");
+  console.log(city);
 
-  const url=`https://www.airbnb.com/s/${city}/homes?`
-  console.log('------URL---------')
-  console.log(url)
-return new Promise ((resolve,reject)=>{
-  getMainPage(url).then((html)=>{
-  const Obj = parseHTML(html)
-  resolve(Obj)
-}).catch((error)=>{ reject(error)})
-})
+  const url = `https://www.airbnb.com/s/${city}/homes?`;
+  console.log("------URL---------");
+  console.log(url);
+  return new Promise((resolve, reject) => {
+    getMainPage(url)
+      .then((html) => {
+        const Obj = parseHTML(html);
+        resolve(Obj);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
-// function using axios to fetch the main url page for a the given city 
+// function using axios to fetch the main url page for a the given city
 async function getMainPage(url) {
-try{
- const response = await axios.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1' }  })
- return response.data
-//  return data = parseHTML(HTML)
- 
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1",
+      },
+    });
+    return response.data;
+    //  return data = parseHTML(HTML)
+  } catch (error) {
+    console.log(error);
+  }
 }
-catch (error){
-console.log(error)
-}}
 
-// function parses the html from the axios call and parse it for the requied fields.It constructs a JSON object to be returned 
-function parseHTML (html) {
+// function parses the html from the axios call and parse it for the requied fields.It constructs a JSON object to be returned
+function parseHTML(html) {
+  const dataArray = [];
+  const $ = cheerio.load(html);
+  const locationStr = $(html).find("._1lbq8dg").find("h1").text();
+  const location = locationStr.split("Stays in ");
 
-  const dataArray=[]
-  const $ = cheerio.load(html)
-  const locationStr=$(html).find('._1lbq8dg').find('h1').text()
-  const location=locationStr.split('Stays in ')
-
-  $('._8ssblpx').each((index,element)=>{ 
-    
+  $("._8ssblpx").each((index, element) => {
     // USED FOR TROUBLSHOOTING SELECTORS
     // console.log('------ELEMENT-------')
     // const d = $(element).html()
     // console.log(d)
 
-  const title=$(element).find('._bzh5lkq').text()
-  const description=$(element).find('._kqh46o').text()
-  const priceStr=$(element).find('._1p7iugi').html()
-  const price=priceStr.split('</span>$')
-  const link=$(element).find('._8s3ctt').find('a').attr('href')
-  const image=$(element).find('._4626ulj').find('img').attr('src')
-// Previous working image selector 
-  //const image=$(element).find('._1048zci').find('img').attr('src')
- 
-  dataObj = {
-    source: 'airbnb',
-    location: location[1],
-    title: title,
-    description: description,
-    price: price[1],
-    link: `https://airbnb.com${link}`,
-    image: image, 
-  }
-dataArray.push(dataObj)
+    const title = $(element).find("._bzh5lkq").text();
+    const description = $(element).find("._kqh46o").text();
+    const priceStr = $(element).find("._1p7iugi").html();
+    const price = priceStr.split("</span>$");
+    const link = $(element).find("._8s3ctt").find("a").attr("href");
+    const image = $(element).find("._4626ulj").find("img").attr("src");
+    // Previous working image selector
+    //const image=$(element).find('._1048zci').find('img').attr('src')
 
-  })
- 
-  return dataArray
+    dataObj = {
+      source: "airbnb",
+      location: location[1],
+      title: title,
+      description: description,
+      price: price[1],
+      link: `https://airbnb.com${link}`,
+      image: image,
+    };
+    dataArray.push(dataObj);
+  });
+
+  return dataArray;
 }
 
 module.exports = {
-  getData : getData
-}
-
+  getData: getData,
+};

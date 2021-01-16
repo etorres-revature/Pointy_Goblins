@@ -5,8 +5,6 @@ import { CardGroup } from "react-bootstrap";
 
 // for landing page search options
 const CardList = (props) => {
-
-
   return (
     <CardGroup>
       <div className="cardList mx-auto">
